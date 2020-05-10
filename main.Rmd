@@ -1,0 +1,64 @@
+---
+title: "Tensor diagrams"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Piotr Migdał
+    url: https://p.migdal.pl
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumgame.io
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Idea:
+
+- Linear algebra.
+- Copy operation.
+- Stochastic models.
+- Tensors in the sense of TensorFlow and torch.tensor.
+
+
+Tensor diagrams where invented by Penrose[@penrose_applications_1971].
+For the first contact with tensor diagrams I suggest glaring at the beautiful diagrams[@bradley_matrices_2019]. If you have some background in quantum mechanics, go for a short introduciton[@biamonte_tensor_2017] or a slightly longer [@bridgeman_hand-waving_2017].
+
+For a complete introduction I suggest book [@coecke_picturing_2017] or lecture notes [@biamonte_lectures_2020].
+
+Tensor diagrams are popular quantum state decomposition for condensed matter physics[@orus_practical_2014,@verstraete_matrix_2008].
+
+Using a script from [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/).
+
+
+
+A vector:
+
+```{r fig.height=2}
+library(r2d3)
+data <- jsonlite::read_json("diagrams/example.json")
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+
+
+
+## You may have seen tensor diagrams
+
+Feynman Diagrams[@kaiser_physics_2005] (for unbounded operators on infitely-dimensional Hilbert spaces) and quantum computing.
+
+TODO: Do LSTM diagrams qualify?
+
+## Hidden Markov Models
+
+Hidden Markov Models[@rabiner_tutorial_1989].
+
+## More 
+
+
+## Footnote
+
+Written in [R Markdown Distill](https://rstudio.github.io/distill).

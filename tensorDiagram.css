@@ -1,0 +1,22 @@
+.tensor {
+  stroke-width: 3px;
+  stroke: black;
+}
+
+.contraction {
+  stroke-width: 3px;
+  stroke: black;
+}
+
+.tensor-label {
+  font: italic 1.2em "Fira Sans", serif;
+  fill: black;
+  text-anchor: middle;
+}
+
+.contraction-label {
+  font: italic 1.2em "Fira Sans", serif;
+  fill: black;
+  text-anchor: middle;
+  dominant-baseline: central;
+}

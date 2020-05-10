@@ -1,0 +1,51 @@
+---
+title: "Untitled"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Anna Kowalska 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web. 
+
+```{r}
+library(DiagrammeR)
+mermaid(diagram = '
+graph LR
+  s(s)
+  v(v) --- i:::none
+  i:::none --- M(M) --- j:::none
+  i2:::none --- T(T) --- j2:::none
+  T --- k2:::none
+  classDef none opacity:0;
+')
+```
+
+```{r}
+library(DiagrammeR)
+mermaid(diagram = '
+graph LR
+  A --- B --- C --- D --- E
+  A --- x
+  B --- y
+  C --- z
+  D --- q
+  E --- w
+')
+```
+
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+
+
+
+
+

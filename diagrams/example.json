@@ -1,0 +1,14 @@
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "x" },
+    { "x": 1, "y": 0, "name": "A" },
+    { "x": 2, "y": 0, "name": "B" }
+  ],
+  "contractions": [
+    { "source": 0, "target": 1 },
+    { "source": 1, "target": 2 },
+    { "source": 1, "target": "down", "name": "i" },
+    { "source": 2, "target": "down", "name": "j" },
+    { "source": 2, "target": "right", "name": "k" }
+  ]
+}

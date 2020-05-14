@@ -1,0 +1,16 @@
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "a" },
+    { "x": 2, "y": 0, "name": "v" },
+    { "x": 5, "y": 0, "name": "M" },
+    { "x": 8, "y": 0, "name": "T" }
+  ],
+  "contractions": [
+    { "source": 1, "target": "right", "name": "i" },
+    { "source": 2, "target": "left", "name": "i" },
+    { "source": 2, "target": "right", "name": "j" },
+    { "source": 3, "target": "left", "name": "i" },
+    { "source": 3, "target": "down", "name": "j" },
+    { "source": 3, "target": "right", "name": "k" }
+  ]
+}

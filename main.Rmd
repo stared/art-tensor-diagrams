@@ -16,33 +16,67 @@ output: distill::distill_article
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Idea:
+Multidimenstional arrays are the basic building blocks for any deep neural network, and many other models in statistics and machine learning.
 
-- Linear algebra.
-- Copy operation.
-- Stochastic models.
-- Tensors in the sense of TensorFlow and torch.tensor.
+However, even for relatively simple operations the notation becomes monstrous:
+
+
+$$
+\sum_{i_1=1}^n \sum_{i_2=1}^n \sum_{i_3=1}^n \sum_{i_4=1}^n
+p_{i_1} T_{i_1 i_2} O_{i_2 j_1}  T_{i_2 i_3} O_{i_3 j_2} T_{i_3 i_4} O_{i_4 j_3}
+$$
+
+If you are aleary faimiliar with the problem, you may guess that it is probability of observing $(j_1, j_2, j_3)$ sequence in a Hidden Markov Model. If you are not, it takes time and effort to parse, and comprehend the formula.
+(I made a typo when writing it for the first time.)
+
+This notations has some problems, as:
+
+- We introduce indices just to sum over them.
+- We need to manually inspect which indices repeat (and how many times).
+- There is no overview over the struture.
+
+
+In this expository article we introduce tensor diagram notation in the context of deep learning.
+That is - we focus on array of real numbers and relevant operations.
+We present it as a convenient notation for matrix summation, nothing less more more.
+
+In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numebrs with  some additional structure. This a very specific case of would a mathematican call a tensor.
+In this context **tensor product** is **outer product**.
+(A note for mathematical purists and fetishists: here we work in a finite-dimensional Hilbert space over real numbers, in a fixed basis.)
+Also, in physics tensors have a need to fullfil certain transformation criteria [II 02: Differential Calculus of Vector Fields from The Feynman Lectures on Physics](https://www.feynmanlectures.caltech.edu/):
+
+> it is not generally true that any three numbers form a vector. It is true only if, when we rotate the coordinate system, the components of the vector transform among themselves in the correct way.
+
+
+
+
+## Background
 
 
 Tensor diagrams where invented by Penrose[@penrose_applications_1971].
-For the first contact with tensor diagrams I suggest glaring at the beautiful diagrams[@bradley_matrices_2019]. If you have some background in quantum mechanics, go for a short introduciton[@biamonte_tensor_2017] or a slightly longer [@bridgeman_hand-waving_2017].
+For the first contact with tensor diagrams I suggest glaring at the beautiful diagrams[@bradley_matrices_2019]. If you have some background in quantum mechanics, go for a short introduciton[@biamonte_tensor_2017] or a slightly longer[@bridgeman_hand-waving_2017].
 
-For a complete introduction I suggest book [@coecke_picturing_2017] or lecture notes [@biamonte_lectures_2020].
+For a complete introduction I suggest book[@coecke_picturing_2017] or lecture notes [@biamonte_lectures_2020].
 
 Tensor diagrams are popular quantum state decomposition for condensed matter physics[@orus_practical_2014,@verstraete_matrix_2008].
 
-Using a script from [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/).
+
+## Key parts
+
+### Tensors
 
 
+A scalar $c$, a vector $v_i$
 
-A vector:
+A scalar $a_{ijk}$
 
 ```{r fig.height=2}
 library(r2d3)
-data <- jsonlite::read_json("diagrams/example.json")
+data <- jsonlite::read_json("diagrams/tensors.json")
 r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 ```
 
+Each loose end correspond to an index.
 
 
 
@@ -62,3 +96,22 @@ Hidden Markov Models[@rabiner_tutorial_1989].
 ## Footnote
 
 Written in [R Markdown Distill](https://rstudio.github.io/distill).
+
+Other inspirations:
+
+- [Einsum is All you Need - Einstein Summation in Deep Learning - Tim Rocktäschel](https://rockt.github.io/2018/04/30/einsum)
+- [Simple diagrams of convoluted neural networks - Piotr Migdał](https://medium.com/inbrowserai/simple-diagrams-of-convoluted-neural-networks-39c097d2925b)
+- [Tensor Diagram Notation - tensornetwork.org](http://tensornetwork.org/diagrams/) for graphic style
+- [Thinking in tensors, writing in PyTorch (a hands-on deep learning intro)](https://github.com/stared/thinking-in-tensors-writing-in-pytorch), especially chapter 1 (it is an eternal Work in Progress, though)
+- [bra-ket-vue](https://github.com/Quantum-Game/bra-ket-vue) - a visualizer for quantum states and matrices, aware of the tensor structure
+- [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/) - initial version of vis
+
+
+## TODO
+
+Idea:
+
+- Linear algebra.
+- Copy operation.
+- Stochastic models.
+- Tensors in the sense of TensorFlow and torch.tensor.

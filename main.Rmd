@@ -66,9 +66,7 @@ Tensor diagrams are popular quantum state decomposition for condensed matter phy
 ### Tensors
 
 
-A scalar $c$, a vector $v_i$
-
-A scalar $a_{ijk}$
+A scalar $c$, a vector $v_i$, a matrix $M_{ij}$ and a (third-order) tensor $T_{ijk}$ are represented by:
 
 ```{r fig.height=2}
 library(r2d3)
@@ -77,6 +75,41 @@ r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 ```
 
 Each loose end correspond to an index.
+
+
+### Operations
+
+- scalar product
+- matrix times vector
+- matrix times matrix
+- expectation value
+- trace
+- tensor product
+- batch matrix product
+
+### Black dot
+
+- matrix is diagonal
+- normalized probabilities (and other momemnts)
+- matrix is stochastic
+- matrix is double stochastic
+- events are independent
+
+### Models and properties
+
+- SVD
+- Markov Chain
+- Hidden Markov Chain
+- Restricted Boltzman machine
+- Ising model
+
+### Deep learning
+
+- batch processing
+- convolution
+- separable convolution
+- batch/etc normalization
+
 
 
 
@@ -105,7 +138,7 @@ Other inspirations:
 - [Thinking in tensors, writing in PyTorch (a hands-on deep learning intro)](https://github.com/stared/thinking-in-tensors-writing-in-pytorch), especially chapter 1 (it is an eternal Work in Progress, though)
 - [bra-ket-vue](https://github.com/Quantum-Game/bra-ket-vue) - a visualizer for quantum states and matrices, aware of the tensor structure
 - [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/) - initial version of vis
-
+- [HN on Terry Tao on some desirable properties of mathematical notation](https://news.ycombinator.com/item?id=23911903) - including that "Is it just me, or does probability theory in general have fairly terrible notation?"
 
 ## TODO
 

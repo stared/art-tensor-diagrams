@@ -1,0 +1,185 @@
+---
+title: "Filtering the NBA's Top Ten Scorers with Vue.js"
+output: html_document
+---
+
+```{r data-paths, include=FALSE}
+library( jsonlite )
+library( dplyr )
+library( ballr )
+```
+
+```{css, echo=FALSE}
+.pb-15 {
+  padding-bottom: 9rem;
+}
+```
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+cat(
+  "<script src='https://cdn.jsdelivr.net/npm/vue@2.6.11'></script>",
+  "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.0.3/nouislider.min.css'>",
+  "<script src='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/11.0.3/nouislider.min.js'></script>"
+)
+```
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+players <- NBAPerGameStatistics(season = 2020)
+top_ten_players <- players %>%
+  top_n(10, pts) %>% 
+  arrange(desc(pts))
+json_players <- toJSON(top_ten_players, pretty=TRUE)
+cat("<script> var topTen=",
+    json_players,
+    "</script>")
+```
+
+<div id='app'>
+
+<div class='row'>
+  <div class='col-md-6'>
+  ```{r, results='asis', echo=FALSE, message=FALSE}
+  cat(
+    "<select v-model='selectedConference' v-on:change='inputHandler($event)' id='conference-selector' class='form-control form-control-lg'>",
+    "<option value=''>Filter by Conference</option>",
+    "<option value='eastern'>Eastern</option>",
+    "<option value='western'>Western</option>",
+    "</select>"
+  )
+  ```
+  </div>
+  <div class='col-md-6'>
+  ```{r, results='asis', echo=FALSE, message=FALSE}
+  cat(
+    "<select v-model='selectedDivision' v-on:change='inputHandler($event)' class='form-control form-control-lg'>",
+    "<option value=''>Filter by Division</option>",
+    "<option value='atlantic'>Atlantic</option>",
+    "<option value='central'>Central</option>",
+    "<option value='northWest'>North West</option>",
+    "<option value='pacific'>Pacific</option>",
+    "<option value='southEast'>South East</option>",
+    "<option value='southWest'>South West</option>",
+    "</select>"
+  )
+  ```
+  </div>
+</div>
+
+<div class='row pb-15'>
+  <h3>Age</h3>
+  <div id='slider' ref='slider'></div>
+</div>
+
+<div class='row'>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Pos</th>
+        <th>Age</th>
+        <th>Tm</th>
+        <th>G</th>
+        <th>GS</th>
+        <th>MP</th>
+        <th>FG</th>
+        <th>FGA%</th>
+        <th>FG%</th>
+        <th>PTS</th>
+      </tr>
+    <thead>
+    <tbody>
+    ```{r, results='asis', echo=FALSE, message=FALSE}
+      cat(
+        "<tr v-for='player in filteredPlayers'>", 
+          "<td>{{ player.player }}</td>",
+          "<td>{{ player.pos }}</td>",
+          "<td>{{ player.age }}</td>",
+          "<td>{{ player.tm }}</td>",
+          "<td>{{ player.g }}</td>",
+          "<td>{{ player.gs }}</td>",
+          "<td>{{ player.mp }}</td>",
+          "<td>{{ player.fg }}</td>",
+          "<td>{{ player.fga }}</td>",
+          "<td>{{ player.fgpercent }}</td>",
+          "<td>{{ player.pts }}</td>",
+        "</tr>"
+      )
+    ```
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+var vue = new Vue({
+    el: '#app',
+    data: {
+      players: topTen,
+      minAgeRange: null,
+      maxAgeRange: null,
+      selectedDivision: '',
+      selectedConference: '',
+      nbaDivisions: {
+        atlantic: ['BOS', 'BRK','NYK', 'PHI', 'TOR'],
+        central: ['CHI', 'CLE', 'DET', 'IND', 'MIL'],
+        northWest: ['DEN', 'MIN', 'OKC', 'POR', 'UTA'],
+        pacific: ['GSW', 'LAC', 'LAL', 'PHO', 'SAC'],
+        southEast: ['ATL', 'CHO', 'MIA', 'ORL', 'WAS'],
+        southWest: ['DAL', 'HOU', 'MEM', 'NOP', 'SAS']
+      },
+      slider: {
+        min: topTen.reduce((prev, curr) => prev.age < curr.age ? prev : curr).age,
+        max: topTen.reduce((prev, curr) => prev.age > curr.age ? prev : curr).age
+      } 
+    },
+  methods: {
+    filterByAge: (minAge, maxAge, selectedDivision, selectedConference, nbaDivisions, nbaConferences) => {
+      return (element) => { 
+        return ( 
+          element.age >= minAge && 
+          element.age <= maxAge &&
+          ( selectedDivision === '' || nbaDivisions[selectedDivision].includes(element.tm) ) &&
+          ( selectedConference === '' || nbaConferences[selectedConference].includes(element.tm) ) 
+        ); 
+      } 
+    },
+    inputHandler(event) {
+      if(event.srcElement.id === 'conference-selector') {
+        this.selectedDivision = ''
+      } else {
+        this.selectedConference = ''
+      }
+    }
+  },
+  mounted() {
+    noUiSlider.create(this.$refs.slider, {
+      start: [this.slider.min, this.slider.max],
+      step: 1,
+      range: {
+        'min': this.slider.min,
+        'max': this.slider.max
+      },
+      pips: {
+          mode: 'steps',
+          density: 100 / (this.slider.max - this.slider.min + 1)
+      }
+    });
+    this.$refs.slider.noUiSlider.on('update',(values, handle) => {
+      this[handle ? 'maxAgeRange' : 'minAgeRange'] = parseInt(values[handle]);
+    }); 
+  },
+  computed: { 
+    filteredPlayers() { 
+      return this.players.filter(this.filterByAge(this.minAgeRange, this.maxAgeRange, this.selectedDivision,
+      this.selectedConference, this.nbaDivisions, this.nbaConferences));
+    },
+    nbaConferences() {
+      return {
+        eastern: [...this.nbaDivisions.atlantic, ...this.nbaDivisions.central, ...this.nbaDivisions.southEast],
+        western: [...this.nbaDivisions.pacific, ...this.nbaDivisions.northWest, ...this.nbaDivisions.southWest]
+      }
+    }
+  } 
+})
+```

@@ -1,0 +1,77 @@
+---
+title: "Untitled"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+cat(
+  "<script src='https://cdn.jsdelivr.net/npm/vue'></script>",
+  "<script src='https://unpkg.com/quantum-tensors'></script>",
+  "<script src='https://unpkg.com/bra-ket-vue'></script>"
+)
+```
+Distill is a publication format for scientific and technical writing, native to the web. 
+
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+
+<div id='matrix1'></div>
+
+nnn
+
+<div id='matrix2'></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+const { Elements, Operator, Dimension, Cx } = QuantumTensors;
+const { ComplexLegend, MatrixViewer } = BraKetVue;
+
+const operator = Elements.beamSplitter(45);
+const operator2 = Operator.fromSparseCoordNames([
+  ['u', 'u', Cx(1)],
+  ['d', 'd', Cx(-1)],
+], [Dimension.spin()]);
+
+new Vue({
+  el: "#matrix1",
+  template: "<matrix-viewer :operator-raw='operator' :dark-mode='false' />",
+  components: {
+  	ComplexLegend,
+    MatrixViewer
+  },
+  data() {
+  	return {
+    	operator,
+      operator2
+		}
+  }
+})
+
+new Vue({
+  el: "#matrix2",
+  template: "<matrix-viewer :operator-raw='operator2' :dark-mode='false' />",
+  components: {
+  	ComplexLegend,
+    MatrixViewer
+  },
+  data() {
+  	return {
+    	operator,
+      operator2
+		}
+  }
+})
+```
+
+
+

@@ -1,0 +1,61 @@
+---
+title: "BraKetVue demo"
+output: html_document
+---
+
+
+```{r, results='asis', echo=FALSE, message=FALSE}
+cat(
+  "<script src='https://cdn.jsdelivr.net/npm/vue'></script>",
+  "<script src='https://unpkg.com/quantum-tensors'></script>",
+  "<script src='https://unpkg.com/bra-ket-vue'></script>"
+)
+```
+aaa
+
+<div id='matrix1'></div>
+
+nnn
+
+<div id='matrix2'></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+const { Elements, Operator, Dimension, Cx } = QuantumTensors;
+const { ComplexLegend, MatrixViewer } = BraKetVue;
+
+const operator = Elements.beamSplitter(45);
+const operator2 = Operator.fromSparseCoordNames([
+  ['u', 'u', Cx(1)],
+  ['d', 'd', Cx(-1)],
+], [Dimension.spin()]);
+
+new Vue({
+  el: "#matrix1",
+  template: "<matrix-viewer :operator-raw='operator' :dark-mode='false' />",
+  components: {
+  	ComplexLegend,
+    MatrixViewer
+  },
+  data() {
+  	return {
+    	operator,
+      operator2
+		}
+  }
+})
+
+new Vue({
+  el: "#matrix2",
+  template: "<matrix-viewer :operator-raw='operator2' :dark-mode='false' />",
+  components: {
+  	ComplexLegend,
+    MatrixViewer
+  },
+  data() {
+  	return {
+    	operator,
+      operator2
+		}
+  }
+})
+```

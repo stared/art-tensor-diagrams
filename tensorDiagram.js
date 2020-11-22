@@ -6,7 +6,7 @@
 const tensors = [
   { x: 0, y: 0, name: "x" },
   { x: 1, y: 0, name: "A" },
-  { x: 2, y: 0, name: "B" },
+  { x: 2, y: 0, name: "B", color: '#000' },
 ];
 
 const contractions = [
@@ -83,7 +83,7 @@ function drawDiagram(svg, tensors, contractions) {
     .attr("r", 10)
     .attr("cx", (d) => xScale(d.x))
     .attr("cy", (d) => yScale(d.y))
-    .style("fill", (d) => colorScale(d.name));
+    .style("fill", (d) => d.color ? colorScale(d.name));
 
   svg
     .selectAll(".tensor-label")

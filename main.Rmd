@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 Multidimenstional arrays are the basic building blocks for any deep neural network, and many other models in statistics and machine learning.
-
 However, even for relatively simple operations the notation becomes monstrous:
 
 
@@ -29,7 +28,7 @@ $$
 If you are aleary faimiliar with the problem, you may guess that it is probability of observing $(j_1, j_2, j_3)$ sequence in a Hidden Markov Model. If you are not, it takes time and effort to parse, and comprehend the formula.
 (I made a typo when writing it for the first time.)
 
-This notations has some problems, as:
+This notation has some problems, as:
 
 - We introduce indices just to sum over them.
 - We need to manually inspect which indices repeat (and how many times).

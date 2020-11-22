@@ -1,6 +1,8 @@
 // r2d3 supports:
 // svg, data
 
+console.log('data is:', data);
+
 
 // usuned, just an example
 const tensors = [
@@ -83,7 +85,7 @@ function drawDiagram(svg, tensors, contractions) {
     .attr("r", 10)
     .attr("cx", (d) => xScale(d.x))
     .attr("cy", (d) => yScale(d.y))
-    .style("fill", (d) => d.color ? colorScale(d.name));
+    .style("fill", (d) => d.color || colorScale(d.name));
 
   svg
     .selectAll(".tensor-label")

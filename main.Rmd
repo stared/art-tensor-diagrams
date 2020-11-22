@@ -78,7 +78,34 @@ Each loose end correspond to an index.
 
 ### Operations
 
-- scalar product
+#### scalar product
+
+```{r fig.height=2}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "a" },
+    { "x": 2, "y": 0, "name": "v" },
+    { "x": 5, "y": 0, "name": "M" },
+    { "x": 8, "y": 0, "name": "T" }
+  ],
+  "contractions": [
+    { "source": 1, "target": "right", "name": "i" },
+    { "source": 2, "target": "left", "name": "i" },
+    { "source": 2, "target": "right", "name": "j" },
+    { "source": 3, "target": "left", "name": "i" },
+    { "source": 3, "target": "down", "name": "j" },
+    { "source": 3, "target": "right", "name": "k" }
+  ]
+}
+'
+data2 <- jsonlite::parse_json(s)
+r2d3(data2, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+
+
 - matrix times vector
 - matrix times matrix
 - expectation value

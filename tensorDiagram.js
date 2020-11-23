@@ -8,7 +8,7 @@ console.log('data is:', data);
 const tensors = [
   { x: 0, y: 0, name: "x" },
   { x: 1, y: 0, name: "A" },
-  { x: 2, y: 0, name: "B", color: '#000' },
+  { x: 2, y: 0, name: "B", kind: 'dot' },
 ];
 
 const contractions = [
@@ -82,10 +82,10 @@ function drawDiagram(svg, tensors, contractions) {
     .enter()
     .append("circle")
     .attr("class", "tensor")
-    .attr("r", 10)
+    .attr("r", (d) => d.kind === "dot" ? 3 : 10)
     .attr("cx", (d) => xScale(d.x))
     .attr("cy", (d) => yScale(d.y))
-    .style("fill", (d) => d.color || colorScale(d.name));
+    .style("fill", (d) => d.kind === "dot" ? "#000" : colorScale(d.name));
 
   svg
     .selectAll(".tensor-label")
@@ -93,8 +93,8 @@ function drawDiagram(svg, tensors, contractions) {
     .enter()
     .append("text")
     .attr("class", "tensor-label")
-    .attr("x", (d) => xScale(d.x))
-    .attr("y", (d) => yScale(d.y - 0.4))
+    .attr("x", (d) => d.labPos === "left" ? xScale(d.x - 0.5) : xScale(d.x))
+    .attr("y", (d) => d.labPos === "left" ? yScale(d.y + 0.1): yScale(d.y - 0.4))
     .text((d) => d.name);
 
   svg

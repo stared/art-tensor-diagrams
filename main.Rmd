@@ -26,7 +26,7 @@ p_{i_1} T_{i_1 i_2} O_{i_2 j_1}  T_{i_2 i_3} O_{i_3 j_2} T_{i_3 i_4} O_{i_4 j_3}
 $$
 
 If you are aleary faimiliar with the problem, you may guess that it is probability of observing $(j_1, j_2, j_3)$ sequence in a Hidden Markov Model. If you are not, it takes time and effort to parse, and comprehend the formula.
-(I made a typo when writing it for the first time.)
+In fact, I made a typo when writing it for the first time.
 
 This notation has some problems, as:
 
@@ -38,6 +38,44 @@ This notation has some problems, as:
 In this expository article we introduce tensor diagram notation in the context of deep learning.
 That is - we focus on array of real numbers and relevant operations.
 We present it as a convenient notation for matrix summation, nothing less more more.
+In this notation, the described equation becomes
+
+```{r fig.height=2}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "p" },
+    { "x": 1, "y": 0, "name": "T" },
+    { "x": 2, "y": 0, "name": "", "kind": "dot" },
+    { "x": 3, "y": 0, "name": "T" },
+    { "x": 4, "y": 0, "name": "", "kind": "dot" },
+    { "x": 5, "y": 0, "name": "T" },
+    { "x": 6, "y": 0, "name": "", "kind": "dot" },
+    { "x": 2, "y": 1, "name": "O", "labPos": "left" },
+    { "x": 4, "y": 1, "name": "O", "labPos": "left" },
+    { "x": 6, "y": 1, "name": "O", "labPos": "left" }
+  ],
+  "contractions": [
+    { "source": 0, "target": 1, "name": "i1" },
+    { "source": 1, "target": 2, "name": "i2" },
+    { "source": 2, "target": 3, "name": "i2" },
+    { "source": 3, "target": 4, "name": "i3" },
+    { "source": 4, "target": 5, "name": "i3" },
+    { "source": 5, "target": 6, "name": "i4" },
+    { "source": 2, "target": 7, "name": "i2" },
+    { "source": 4, "target": 8, "name": "i2" },
+    { "source": 6, "target": 9, "name": "i2" },
+    { "source": 7, "target": "down", "name": "j1" },
+    { "source": 8, "target": "down", "name": "j2" },
+    { "source": 9, "target": "down", "name": "j3" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
 
 In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numebrs with  some additional structure. This a very specific case of would a mathematican call a tensor.
 In this context **tensor product** is **outer product**.
@@ -67,7 +105,7 @@ Tensor diagrams are popular quantum state decomposition for condensed matter phy
 
 A scalar $c$, a vector $v_i$, a matrix $M_{ij}$ and a (third-order) tensor $T_{ijk}$ are represented by:
 
-```{r fig.height=2}
+```{r fig.height=1.2}
 library(r2d3)
 data <- jsonlite::read_json("diagrams/tensors.json")
 r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
@@ -80,15 +118,121 @@ Each loose end correspond to an index.
 
 #### scalar product
 
-```{r fig.height=2}
+$\sum_i v_i u_i$ (or traditionally:  $\vec{v} \cdot \vec{u}$, or in quantum mechanics $\langle u | v \rangle$)
+
+```{r fig.height=0.8}
 library(r2d3)
 s <- '
 {
   "tensors": [
-    { "x": 0, "y": 0, "name": "a" },
-    { "x": 2, "y": 0, "name": "v" },
-    { "x": 5, "y": 0, "name": "M" },
-    { "x": 8, "y": 0, "name": "T" }
+    { "x": 0, "y": 0, "name": "v" },
+    { "x": 1, "y": 0, "name": "u" }
+
+  ],
+  "contractions": [
+    { "source": 0, "target": 1, "name": "i" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+
+#### Vector times matrix
+
+$\sum_i v_i M_{ij}$ (or traditionally:  $\vec{u} M$)
+
+```{r fig.height=0.8}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "u" },
+    { "x": 1, "y": 0, "name": "M" }
+
+  ],
+  "contractions": [
+  { "source": 0, "target": 1, "name": "i" },
+  { "source": 1, "target": "right", "name": "j" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+#### Matrix times matrix
+
+$\sum_j M_{ij} M_{jk}$ (or traditionally:  $M N$)
+
+```{r fig.height=0.8}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 1, "y": 0, "name": "M" },
+    { "x": 2, "y": 0, "name": "N" }
+
+  ],
+  "contractions": [
+  { "source": 0, "target": "left", "name": "i" },
+  { "source": 0, "target": 1, "name": "j" },
+  { "source": 1, "target": "right", "name": "k" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+#### Expected value
+
+$\sum_{ij} v_i M_{ij} v_j$ (or in the context of quantum: $\langle v | M | v \rangle$)
+
+```{r fig.height=0.8}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "v" },
+    { "x": 1, "y": 0, "name": "M" },
+    { "x": 2, "y": 0, "name": "v" }
+
+  ],
+  "contractions": [
+    { "source": 0, "target": 1, "name": "i" },
+    { "source": 1, "target": 2, "name": "j" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+
+- trace
+- tensor product
+- batch matrix product
+
+### Black dot
+
+Let's introduce a symbol for a tensor with all 1s.
+
+In the case of no dimensions, it is just 1, and it is not that interesting.
+For $v = (1, 1, \ldots, 1)$.
+$M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
+$T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
+
+```{r fig.height=1.6}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 0, "y": 0, "name": "", "kind": "dot" },
+    { "x": 2, "y": 0, "name": "", "kind": "dot" },
+    { "x": 5, "y": 0, "name": "", "kind": "dot" },
+    { "x": 8, "y": 0, "name": "", "kind": "dot" }
   ],
   "contractions": [
     { "source": 1, "target": "right", "name": "i" },
@@ -100,22 +244,33 @@ s <- '
   ]
 }
 '
-data2 <- jsonlite::parse_json(s)
-r2d3(data2, script = "tensorDiagram.js", css = "tensorDiagram.css")
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```
+
+#### Matrix is diagonal
+
+
+```{r fig.height=1.2}
+library(r2d3)
+s <- '
+{
+  "tensors": [
+    { "x": 1, "y": 0, "name": "", "kind": "dot" },
+    { "x": 1, "y": 1, "name": "s", "labPos": "left" }
+  ],
+  "contractions": [
+    { "source": 0, "target": "left", "name": "i" },
+    { "source": 0, "target": 1, "name": "k" },
+    { "source": 0, "target": "right", "name": "j" }
+  ]
+}
+'
+data <- jsonlite::parse_json(s)
+r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 ```
 
 
-
-- matrix times vector
-- matrix times matrix
-- expectation value
-- trace
-- tensor product
-- batch matrix product
-
-### Black dot
-
-- matrix is diagonal
 - normalized probabilities (and other momemnts)
 - matrix is stochastic
 - matrix is double stochastic

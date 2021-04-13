@@ -222,7 +222,7 @@ Let's introduce a symbol for a tensor with all 1s.
 In the case of no dimensions, it is just 1, and it is not that interesting.
 For $v = (1, 1, \ldots, 1)$.
 $M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
-$T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
+$T$ is a tensor for which $T_{ijk} = 1$ for all $i = j = k$, otherwise there are 0s.
 
 ```{r fig.height=1.6}
 library(r2d3)

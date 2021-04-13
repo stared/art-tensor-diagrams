@@ -296,7 +296,7 @@ r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 
 ## You may have seen tensor diagrams
 
-Feynman Diagrams[@kaiser_physics_2005] (for unbounded operators on infitely-dimensional Hilbert spaces) and quantum computing.
+Feynman Diagrams[@kaiser_physics_2005] (for unbounded operators on infinitely-dimensional Hilbert spaces) and quantum computing.
 
 TODO: Do LSTM diagrams qualify?
 

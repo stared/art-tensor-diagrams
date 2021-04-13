@@ -141,14 +141,14 @@ r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 
 #### Vector times matrix
 
-$\sum_i v_i M_{ij}$ (or traditionally:  $\vec{u} M$)
+$\sum_i v_i M_{ij}$ (or traditionally:  $\vec{v} M$)
 
 ```{r fig.height=0.8}
 library(r2d3)
 s <- '
 {
   "tensors": [
-    { "x": 0, "y": 0, "name": "u" },
+    { "x": 0, "y": 0, "name": "v" },
     { "x": 1, "y": 0, "name": "M" }
 
   ],

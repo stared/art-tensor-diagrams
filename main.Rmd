@@ -271,7 +271,7 @@ r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 ```
 
 
-- normalized probabilities (and other momemnts)
+- normalized probabilities (and other moments)
 - matrix is stochastic
 - matrix is double stochastic
 - events are independent

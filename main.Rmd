@@ -77,7 +77,7 @@ r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
 ```
 
 
-In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numbers with  some additional structure. This a very specific case of would a mathematican call a tensor.
+In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numbers with  some additional structure. This a very specific case of would a mathematician call a tensor.
 In this context **tensor product** is **outer product**.
 (A note for mathematical purists and fetishists: here we work in a finite-dimensional Hilbert space over real numbers, in a fixed basis.)
 Also, in physics tensors have a need to fullfil certain transformation criteria [II 02: Differential Calculus of Vector Fields from The Feynman Lectures on Physics](https://www.feynmanlectures.caltech.edu/):

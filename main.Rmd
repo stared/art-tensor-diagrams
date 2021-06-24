@@ -321,6 +321,84 @@ Other inspirations:
 - [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/) - initial version of vis
 - [HN on Terry Tao on some desirable properties of mathematical notation](https://news.ycombinator.com/item?id=23911903) - including that "Is it just me, or does probability theory in general have fairly terrible notation?"
 
+# Claudia's part
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.1.1/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
+Multiply two matrices followed by calculating the sum of each column resulting in a vector
+
+<div class="equation">
+<div id="einsumindl1" class="eq-diagram"></div>
+<div id="einsumindl1_sum_ik" class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ik}$$</div>
+<div id="einsumindl1_A_ik" class="eq-elem">$$A_{ik}$$</div>
+<div id="einsumindl1_B_kj" class="eq-elem">$$B_{kj}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+tensors_einsumindl1 = [
+    { x: 1, y: 0, name: "A", idEqPart: "einsumindl1_A_ik",
+        indices: [
+            { pos: "left", name: "i" },
+            { pos: "right", name: "k" }
+        ]
+    },
+    { x: 2, y: 0, name: "B", idEqPart: "einsumindl1_B_kj",
+        indices: [
+            { pos: "left", name: "k" },
+            { pos: "right", name: "j" }
+        ]
+    },
+];
+
+const contractions_einsumindl1 = [
+    { source: 0, target: 1, name: "k" },
+];
+
+const diagram1 = new TensorDiagram(tensors_einsumindl1, contractions_einsumindl1, []);
+diagram1.setSize(220, 120).draw("#einsumindl1")
+
+```
+
+Dot product of two vectors
+
+<div class="equation">
+<div id="einsumindl2" class="eq-diagram"></div>
+<div id="einsumindl2_sum_i" class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+<div id="einsumindl2_a_i" class="eq-elem">$$a_{i}$$</div>
+<div id="einsumindl2_b_i" class="eq-elem">$$b_{i}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+const tensors_einsumindl2 = [
+    { x: 0, y: 0, name: "a", idEqPart: "einsumindl2_a_i",
+        indices: [
+            { pos: "right", name: "i" },
+        ]
+    },
+    { x: 1, y: 0, name: "b", idEqPart: "einsumindl2_b_i",
+        indices: [
+            { pos: "left", name: "i" },
+        ]
+    },
+];
+
+const contractions_einsumindl2 = [
+    { source: 0, target: 1, name: "i" },
+];
+
+const diagram2 = new TensorDiagram(tensors_einsumindl2, contractions_einsumindl2, []);
+diagram2.setSize(100, 120).draw("#einsumindl2")
+
+```
+
+
 ## TODO
 
 Idea:

@@ -496,6 +496,49 @@ TensorDiagram.new()
 
 ```
 
+### Matrix-vector multiplication
+
+<div id="einsumindl9" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+<div class="eq-elem tensor-eq-b">$$b_{k}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("b", "right", ["k"], [])
+  .addContraction(0, 1, "k")
+  .setSize(160, 120)
+  .draw("#einsumindl9");
+
+```
+
+### Matrix-matrix multiplication
+
+<div id="einsumindl10" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+<div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("B", "right", ["k"], ["j"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 120)
+  .draw("#einsumindl10");
+
+```
+
+
+
+
 ## TODO
 
 Idea:

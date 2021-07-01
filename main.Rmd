@@ -412,6 +412,38 @@ TensorDiagram.new()
 
 ```
 
+### Matrix transpose
+
+<div class="equation">
+ <div id="einsumindl5_1" class="eq-elem">
+  <div class="eq-diagram"></div>
+ </div>
+ <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+ <div id="einsumindl5_2" class="eq-elem">
+  <div class="eq-diagram"></div>
+ </div>
+ <div class="eq-elem">$$\hspace{0.3cm}\rightarrow\hspace{0.3cm}$$</div>
+ <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
+ <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+ <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+<!-- It is not possible to mix parts of an equation with separate diagrams, 
+since the code assumes that the diagram and the equation are the same div -->
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("B", {x: 1, y: 0}, ["j"], ["i"])
+  .setSize(160, 110)
+  .draw("#einsumindl5_1");
+  
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(160, 110)
+  .draw("#einsumindl5_2");
+
+```
 
 ## TODO
 

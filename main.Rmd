@@ -399,6 +399,8 @@ TensorDiagram.new()
 <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
 </div>
 
+<!-- This diagram has the problem that the label of the first tensor is behind the index "up" -->
+
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()

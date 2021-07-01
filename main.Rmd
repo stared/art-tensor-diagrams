@@ -330,7 +330,7 @@ cat(
 )
 ```
 
-Multiply two matrices followed by calculating the sum of each column resulting in a vector
+### Multiply two matrices followed by calculating the sum of each column resulting in a vector
 
 <div id="einsumindl1" class="equation">
 <div class="eq-diagram"></div>
@@ -350,7 +350,7 @@ TensorDiagram.new()
 
 ```
 
-Dot product of two vectors
+### Dot product of two vectors
 
 <div id="einsumindl2" class="equation">
 <div class="eq-diagram"></div>
@@ -370,7 +370,7 @@ TensorDiagram.new()
 
 ```
 
-Applying a transformation to vectors in a higher-order tensor
+### Applying a transformation to vectors in a higher-order tensor
 
 <div id="einsumindl3" class="equation">
 <div class="eq-diagram"></div>
@@ -390,7 +390,7 @@ TensorDiagram.new()
 
 ```
 
-Order-4 tensor and project vectors in the 3rd dimension
+### Order-4 tensor and project vectors in the 3rd dimension
 
 <div id="einsumindl4" class="equation">
 <div class="eq-diagram"></div>

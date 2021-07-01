@@ -445,6 +445,57 @@ TensorDiagram.new()
 
 ```
 
+### Sum
+
+<div id="einsumindl6" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(160, 110)
+  .draw("#einsumindl6");
+
+```
+
+### Column sum
+
+<div id="einsumindl7" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(160, 110)
+  .draw("#einsumindl7");
+
+```
+
+### Row sum
+
+<div id="einsumindl8" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(160, 110)
+  .draw("#einsumindl8");
+
+```
+
 ## TODO
 
 Idea:

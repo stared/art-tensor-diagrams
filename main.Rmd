@@ -575,6 +575,31 @@ TensorDiagram.new()
 
 ```
 
+### Hadamard product
+
+<div id="einsumindl13" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+<div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("X", {x: 1, y: 1}, ["i"], ["k","m"])
+  .addTensor("A", {x: 2, y: 0}, ["k"], ["l"])
+  .addTensor("B", {x: 2, y: 2}, ["m"], ["n"])
+  .addTensor("Y", {x: 3, y: 1}, ["l","n"], ["j"])
+  .addContraction(0, 1, "k", "left")
+  .addContraction(0, 2, "m", "left")
+  .addContraction(1, 3, "l", "left")
+  .addContraction(2, 3, "n", "left")
+  .setSize(270, 220)
+  .draw("#einsumindl13");
+
+```
+
 
 ## TODO
 

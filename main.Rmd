@@ -600,6 +600,37 @@ TensorDiagram.new()
 
 ```
 
+### Outer product
+
+<div id="einsumindl14_1" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+<div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
+</div>
+
+<div id="einsumindl14_2" class="equation">
+<div class="eq-diagram"></div>
+<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+<div class="eq-elem tensor-eq-C">$$C_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", {x: 1, y: 0}, ["i"], [])
+  .addTensor("b", {x: 2, y: 0}, [], ["j"])
+  .setSize(220, 120)
+  .draw("#einsumindl14_1");
+  
+TensorDiagram.new()
+  .addTensor("C", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(210, 120)
+  .draw("#einsumindl14_2");
+
+```
+
+
 
 ## TODO
 

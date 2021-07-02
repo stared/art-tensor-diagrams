@@ -1,15 +1,23 @@
 ---
 title: "Tensor diagrams"
 description: |
-  A new article created using the Distill format.
+  Penrose notation for deep learning.
 author:
   - name: Piotr Migdał
     url: https://p.migdal.pl
     affiliation: Quantum Flytrap
     affiliation_url: https://quantumgame.io
+  - name: Claudia Zendejas-Morales
+    url: http://claudiazm.xyz
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumflytrap.com
 date: "`r Sys.Date()`"
 bibliography: references.bib
-output: distill::distill_article
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    self_contained: false
 ---
 
 ```{r setup, include=FALSE}

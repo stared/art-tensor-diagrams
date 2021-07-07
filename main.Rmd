@@ -595,10 +595,10 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("X", {x: 1, y: 1}, ["i"], ["k","m"])
+  .addTensor("X", {x: 1, y: 1}, ["i"], ["k","m"], [], [], "dot")
   .addTensor("A", {x: 2, y: 0}, ["k"], ["l"])
   .addTensor("B", {x: 2, y: 2}, ["m"], ["n"])
-  .addTensor("Y", {x: 3, y: 1}, ["l","n"], ["j"])
+  .addTensor("Y", {x: 3, y: 1}, ["l","n"], ["j"], [], [], "dot")
   .addContraction(0, 1, "k", "left")
   .addContraction(0, 2, "m", "left")
   .addContraction(1, 3, "l", "left")

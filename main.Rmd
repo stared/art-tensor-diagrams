@@ -333,7 +333,7 @@ Other inspirations:
 
 ```{r echo=FALSE, message=FALSE, results='asis'}
 cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.1/dist/esbuild/tensor-diagrams.js'></script>",
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.2/dist/esbuild/tensor-diagrams.js'></script>",
   "<link rel='stylesheet' href='tensorDiagram.css'>"
 )
 ```

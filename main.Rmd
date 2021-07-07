@@ -79,48 +79,11 @@ TensorDiagram.new()
   .addContraction(4, 8, "yo")
   .addContraction(5, 6, "tz")
   .addContraction(6, 9, "zo")
-  .setSize(520, 350)
+  .setSize(400, 200)
   .setColorScheme([], [], 'google10')
   .draw("#example1");
 
 ```
-
-```{r fig.height=2}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "p" },
-    { "x": 1, "y": 0, "name": "T" },
-    { "x": 2, "y": 0, "name": "", "kind": "dot" },
-    { "x": 3, "y": 0, "name": "T" },
-    { "x": 4, "y": 0, "name": "", "kind": "dot" },
-    { "x": 5, "y": 0, "name": "T" },
-    { "x": 6, "y": 0, "name": "", "kind": "dot" },
-    { "x": 2, "y": 1, "name": "O", "labPos": "left" },
-    { "x": 4, "y": 1, "name": "O", "labPos": "left" },
-    { "x": 6, "y": 1, "name": "O", "labPos": "left" }
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i1" },
-    { "source": 1, "target": 2, "name": "i2" },
-    { "source": 2, "target": 3, "name": "i2" },
-    { "source": 3, "target": 4, "name": "i3" },
-    { "source": 4, "target": 5, "name": "i3" },
-    { "source": 5, "target": 6, "name": "i4" },
-    { "source": 2, "target": 7, "name": "i2" },
-    { "source": 4, "target": 8, "name": "i2" },
-    { "source": 6, "target": 9, "name": "i2" },
-    { "source": 7, "target": "down", "name": "j1" },
-    { "source": 8, "target": "down", "name": "j2" },
-    { "source": 9, "target": "down", "name": "j3" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
-```
-
 
 In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numebrs with  some additional structure. This a very specific case of would a mathematican call a tensor.
 In this context **tensor product** is **outer product**.

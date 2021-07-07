@@ -24,6 +24,13 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.2/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
 Multidimenstional arrays are the basic building blocks for any deep neural network, and many other models in statistics and machine learning.
 However, even for relatively simple operations the notation becomes monstrous:
 
@@ -47,6 +54,36 @@ In this expository article we introduce tensor diagram notation in the context o
 That is - we focus on array of real numbers and relevant operations.
 We present it as a convenient notation for matrix summation, nothing less more more.
 In this notation, the described equation becomes
+
+<div id="example1" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("p", {x: 0, y: 0}, [], ["i1"])
+  .addTensor("T", {x: 1, y: 0}, ["i1"], ["tx"])
+  .addTensor("x", {x: 2, y: 0}, ["tx"], ["xt"], [], ["xo"], "dot")
+  .addTensor("T", {x: 3, y: 0}, ["xt"], ["ty"])
+  .addTensor("y", {x: 4, y: 0}, ["ty"], ["yt"], [], ["yo"], "dot")
+  .addTensor("T", {x: 5, y: 0}, ["yt"], ["tz"])
+  .addTensor("z", {x: 6, y: 0}, ["tz"], [], [], ["zo"], "dot")
+  .addTensor("O", {x: 2, y: 1}, [], [], ["xo"], ["j1"])
+  .addTensor("O", {x: 4, y: 1}, [], [], ["yo"], ["j2"])
+  .addTensor("O", {x: 6, y: 1}, [], [], ["zo"], ["j3"])
+  .addContraction(0, 1, "i1")
+  .addContraction(1, 2, "tx")
+  .addContraction(2, 3, "xt")
+  .addContraction(2, 7, "xo")
+  .addContraction(3, 4, "ty")
+  .addContraction(4, 5, "yt")
+  .addContraction(4, 8, "yo")
+  .addContraction(5, 6, "tz")
+  .addContraction(6, 9, "zo")
+  .setSize(520, 350)
+  .setColorScheme([], [], 'google10')
+  .draw("#example1");
+
+```
 
 ```{r fig.height=2}
 library(r2d3)
@@ -331,12 +368,7 @@ Other inspirations:
 
 # Claudia's part
 
-```{r echo=FALSE, message=FALSE, results='asis'}
-cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.2/dist/esbuild/tensor-diagrams.js'></script>",
-  "<link rel='stylesheet' href='tensorDiagram.css'>"
-)
-```
+
 
 ### Multiply two matrices followed by calculating the sum of each column resulting in a vector
 

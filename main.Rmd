@@ -336,10 +336,10 @@ Other inspirations:
 ### Multiply two matrices followed by calculating the sum of each column resulting in a vector
 
 <div id="einsumindl1" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ik}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ik}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -356,10 +356,10 @@ TensorDiagram.new()
 ### Dot product of two vectors
 
 <div id="einsumindl2" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -376,10 +376,10 @@ TensorDiagram.new()
 ### Applying a transformation to vectors in a higher-order tensor
 
 <div id="einsumindl3" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-T">$$T_{ntk}$$</div>
-<div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-T">$$T_{ntk}$$</div>
+  <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -396,10 +396,10 @@ TensorDiagram.new()
 ### Order-4 tensor and project vectors in the 3rd dimension
 
 <div id="einsumindl4" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{tk}$$</div>
-<div class="eq-elem tensor-eq-T">$$T_{ntkm}$$</div>
-<div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{tk}$$</div>
+  <div class="eq-elem tensor-eq-T">$$T_{ntkm}$$</div>
+  <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
 </div>
 
 <!-- This diagram has the problem that the label of the first tensor is behind the index "up" -->
@@ -419,15 +419,15 @@ TensorDiagram.new()
 
 
 <div id="einsumindl5_1" class="equation">
-<div class="eq-diagram"></div>
- <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
- <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
 </div>
 
 <div id="einsumindl5_2" class="equation">
-<div class="eq-diagram"></div>
- <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
- <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -447,9 +447,9 @@ TensorDiagram.new()
 ### Sum
 
 <div id="einsumindl6" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -464,9 +464,9 @@ TensorDiagram.new()
 ### Column sum
 
 <div id="einsumindl7" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -481,9 +481,9 @@ TensorDiagram.new()
 ### Row sum
 
 <div id="einsumindl8" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -498,10 +498,10 @@ TensorDiagram.new()
 ### Matrix-vector multiplication
 
 <div id="einsumindl9" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{k}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{k}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -518,10 +518,10 @@ TensorDiagram.new()
 ### Matrix-matrix multiplication
 
 <div id="einsumindl10" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -538,10 +538,10 @@ TensorDiagram.new()
 ### Dot product: Vector
 
 <div id="einsumindl11" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -558,10 +558,10 @@ TensorDiagram.new()
 ### Dot product: Matrix
 
 <div id="einsumindl12" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
 </div>
 
 <!-- curved contraction doesn't work -->
@@ -581,10 +581,10 @@ TensorDiagram.new()
 ### Hadamard product
 
 <div id="einsumindl13" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
@@ -606,16 +606,16 @@ TensorDiagram.new()
 ### Outer product
 
 <div id="einsumindl14_1" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
 </div>
 
 <div id="einsumindl14_2" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-C">$$C_{ij}$$</div>
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-C">$$C_{ij}$$</div>
 </div>
 
 ```{js, results='asis', echo=FALSE, message=FALSE}

@@ -137,22 +137,18 @@ Each loose end correspond to an index.
 
 $\sum_i v_i u_i$ (or traditionally:  $\vec{v} \cdot \vec{u}$, or in quantum mechanics $\langle u | v \rangle$)
 
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "v" },
-    { "x": 1, "y": 0, "name": "u" }
+<div id="example3" class="equation"></div>
 
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("v", {x: 0, y: 0}, [], ["i"])
+  .addTensor("u", {x: 1, y: 0}, ["i"], [])
+  .addContraction(0, 1, "i")
+  .setSize(210, 120)
+  .draw("#example3");
+
+
 ```
 
 

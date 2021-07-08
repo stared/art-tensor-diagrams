@@ -236,26 +236,18 @@ TensorDiagram.new()
 
 #### Matrix is diagonal
 
+<div id="example8" class="equation"></div>
 
-```{r fig.height=1.2}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 1, "y": 0, "name": "", "kind": "dot" },
-    { "x": 1, "y": 1, "name": "s", "labPos": "left" }
-  ],
-  "contractions": [
-    { "source": 0, "target": "left", "name": "i" },
-    { "source": 0, "target": 1, "name": "k" },
-    { "source": 0, "target": "right", "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 1, y: 0}, ["i"], ["j"], [], ["k"], "dot")
+  .addTensor("S", {x: 1, y: 1}, [], [], ["k"], [])
+  .addContraction(0, 1, "k")
+  .setSize(160, 150)
+  .draw("#example8");
+
 ```
-
 
 - normalized probabilities (and other momemnts)
 - matrix is stochastic

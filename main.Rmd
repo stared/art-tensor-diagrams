@@ -218,28 +218,20 @@ For $v = (1, 1, \ldots, 1)$.
 $M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
 $T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
 
-```{r fig.height=1.6}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "", "kind": "dot" },
-    { "x": 2, "y": 0, "name": "", "kind": "dot" },
-    { "x": 5, "y": 0, "name": "", "kind": "dot" },
-    { "x": 8, "y": 0, "name": "", "kind": "dot" }
-  ],
-  "contractions": [
-    { "source": 1, "target": "right", "name": "i" },
-    { "source": 2, "target": "left", "name": "i" },
-    { "source": 2, "target": "right", "name": "j" },
-    { "source": 3, "target": "left", "name": "i" },
-    { "source": 3, "target": "down", "name": "j" },
-    { "source": 3, "target": "right", "name": "k" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+<div id="example7" class="equation"></div>
+<!-- using temporal name '1' for 'dots'-->
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("1", {x: 0, y: 0}, [], [], [], [], "dot")
+  .addTensor("1", {x: 2, y: 0}, [], ["i"], [], [], "dot")
+  .addTensor("1", {x: 5, y: 0}, ["i"], ["j"], [], [], "dot")
+  .addTensor("1", {x: 8, y: 0}, ["i"], ["k"], [], ["j"], "dot")
+  .setSize(580, 140)
+  .setColorScheme(['1'], ['black'])
+  .draw("#example7");
+
 ```
 
 #### Matrix is diagonal

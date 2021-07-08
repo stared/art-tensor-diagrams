@@ -145,9 +145,8 @@ TensorDiagram.new()
   .addTensor("v", {x: 0, y: 0}, [], ["i"])
   .addTensor("u", {x: 1, y: 0}, ["i"], [])
   .addContraction(0, 1, "i")
-  .setSize(210, 120)
+  .setSize(100, 120)
   .draw("#example3");
-
 
 ```
 
@@ -156,23 +155,17 @@ TensorDiagram.new()
 
 $\sum_i v_i M_{ij}$ (or traditionally:  $\vec{u} M$)
 
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "u" },
-    { "x": 1, "y": 0, "name": "M" }
+<div id="example4" class="equation"></div>
 
-  ],
-  "contractions": [
-  { "source": 0, "target": 1, "name": "i" },
-  { "source": 1, "target": "right", "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("u", {x: 0, y: 0}, [], ["i"])
+  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
+  .addContraction(0, 1, "i")
+  .setSize(160, 120)
+  .draw("#example4");
+
 ```
 
 #### Matrix times matrix

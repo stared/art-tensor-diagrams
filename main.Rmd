@@ -172,24 +172,17 @@ TensorDiagram.new()
 
 $\sum_j M_{ij} M_{jk}$ (or traditionally:  $M N$)
 
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 1, "y": 0, "name": "M" },
-    { "x": 2, "y": 0, "name": "N" }
+<div id="example5" class="equation"></div>
 
-  ],
-  "contractions": [
-  { "source": 0, "target": "left", "name": "i" },
-  { "source": 0, "target": 1, "name": "j" },
-  { "source": 1, "target": "right", "name": "k" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("N", {x: 2, y: 0}, ["j"], ["k"])
+  .addContraction(0, 1, "j")
+  .setSize(220, 120)
+  .draw("#example5");
+
 ```
 
 #### Expected value

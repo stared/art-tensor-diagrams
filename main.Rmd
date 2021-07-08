@@ -189,24 +189,19 @@ TensorDiagram.new()
 
 $\sum_{ij} v_i M_{ij} v_j$ (or in the context of quantum: $\langle v | M | v \rangle$)
 
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "v" },
-    { "x": 1, "y": 0, "name": "M" },
-    { "x": 2, "y": 0, "name": "v" }
+<div id="example6" class="equation"></div>
 
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i" },
-    { "source": 1, "target": 2, "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("v", {x: 0, y: 0}, [], ["i"])
+  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("v", {x: 2, y: 0}, ["j"], [])
+  .addContraction(0, 1, "i")
+  .addContraction(1, 2, "j")
+  .setSize(160, 120)
+  .draw("#example6");
+
 ```
 
 

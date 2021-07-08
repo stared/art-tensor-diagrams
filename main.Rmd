@@ -113,10 +113,19 @@ Tensor diagrams are popular quantum state decomposition for condensed matter phy
 
 A scalar $c$, a vector $v_i$, a matrix $M_{ij}$ and a (third-order) tensor $T_{ijk}$ are represented by:
 
-```{r fig.height=1.2}
-library(r2d3)
-data <- jsonlite::read_json("diagrams/tensors.json")
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+<div id="example2" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", {x: 0, y: 0}, [], [])
+  .addTensor("v", {x: 2, y: 0}, [], ["i"])
+  .addTensor("M", {x: 5, y: 0}, ["i"], ["j"])
+  .addTensor("T", {x: 8, y: 0}, ["i"], ["k"], [], ["j"])
+  .setSize(580, 140)
+  .draw("#example2");
+
+
 ```
 
 Each loose end correspond to an index.

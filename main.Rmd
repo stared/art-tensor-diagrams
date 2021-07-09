@@ -423,9 +423,8 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [], "dot")
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
   .setSize(160, 110)
-  .setColorScheme(['A'], ['black'], 'tensornetwork')
   .draw("#einsumindl6");
 
 ```
@@ -441,9 +440,8 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [], "dot")
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
   .setSize(160, 110)
-  .setColorScheme(['A'], ['black'], 'tensornetwork')
   .draw("#einsumindl7");
 
 ```
@@ -459,9 +457,10 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [], "dot")
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
+  .addTensor("dot", {x: 2, y: 0}, ["j"], [], [], [], { shape: "dot", showLabel: false })
+  .addContraction(0, 1, "j")
   .setSize(160, 110)
-  .setColorScheme(['A'], ['black'], 'tensornetwork')
   .draw("#einsumindl8");
 
 ```

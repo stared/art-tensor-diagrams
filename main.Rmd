@@ -62,14 +62,14 @@ In this notation, the described equation becomes
 TensorDiagram.new()
   .addTensor("p", {x: 0, y: 0}, [], ["i1"])
   .addTensor("T", {x: 1, y: 0}, ["i1"], ["tx"])
-  .addTensor("x", {x: 2, y: 0}, ["tx"], ["xt"], [], ["xo"], "dot")
+  .addTensor("dot", {x: 2, y: 0}, ["tx"], ["xt"], [], ["xo"], { shape:"dot", showLabel: false })
   .addTensor("T", {x: 3, y: 0}, ["xt"], ["ty"])
-  .addTensor("y", {x: 4, y: 0}, ["ty"], ["yt"], [], ["yo"], "dot")
+  .addTensor("dot", {x: 4, y: 0}, ["ty"], ["yt"], [], ["yo"], { shape:"dot", showLabel: false })
   .addTensor("T", {x: 5, y: 0}, ["yt"], ["tz"])
-  .addTensor("z", {x: 6, y: 0}, ["tz"], [], [], ["zo"], "dot")
-  .addTensor("O", {x: 2, y: 1}, [], [], ["xo"], ["j1"])
-  .addTensor("O", {x: 4, y: 1}, [], [], ["yo"], ["j2"])
-  .addTensor("O", {x: 6, y: 1}, [], [], ["zo"], ["j3"])
+  .addTensor("dot", {x: 6, y: 0}, ["tz"], [], [], ["zo"], { shape:"dot", showLabel: false })
+  .addTensor("O", {x: 2, y: 1}, [], [], ["xo"], ["j1"], { labelPos: "left"} )
+  .addTensor("O", {x: 4, y: 1}, [], [], ["yo"], ["j2"], { labelPos: "left"} )
+  .addTensor("O", {x: 6, y: 1}, [], [], ["zo"], ["j3"], { labelPos: "left"} )
   .addContraction(0, 1, "i1")
   .addContraction(1, 2, "tx")
   .addContraction(2, 3, "xt")
@@ -80,7 +80,6 @@ TensorDiagram.new()
   .addContraction(5, 6, "tz")
   .addContraction(6, 9, "zo")
   .setSize(400, 200)
-  .setColorScheme(["x", "y", "z"], ['black','black','black'], 'google10')
   .draw("#example1");
 
 ```
@@ -224,12 +223,11 @@ $T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("1", {x: 0, y: 0}, [], [], [], [], "dot")
-  .addTensor("1", {x: 2, y: 0}, [], ["i"], [], [], "dot")
-  .addTensor("1", {x: 5, y: 0}, ["i"], ["j"], [], [], "dot")
-  .addTensor("1", {x: 8, y: 0}, ["i"], ["k"], [], ["j"], "dot")
+  .addTensor("dot", {x: 0, y: 0}, [], [], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 2, y: 0}, [], ["i"], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 5, y: 0}, ["i"], ["j"], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 8, y: 0}, ["i"], ["k"], [], ["j"], { shape:"dot", showLabel: false })
   .setSize(580, 140)
-  .setColorScheme(['1'], ['black'])
   .draw("#example7");
 
 ```
@@ -241,8 +239,8 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("dot", {x: 1, y: 0}, ["i"], ["j"], [], ["k"], "dot")
-  .addTensor("S", {x: 1, y: 1}, [], [], ["k"], [])
+  .addTensor("dot", {x: 1, y: 0}, ["i"], ["j"], [], ["k"], { shape:"dot", showLabel: false })
+  .addTensor("S", {x: 1, y: 1}, [], [], ["k"], [], { labelPos: "left"} )
   .addContraction(0, 1, "k")
   .setSize(160, 150)
   .draw("#example8");
@@ -563,16 +561,15 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("X", {x: 1, y: 1}, ["i"], ["k","m"], [], [], "dot")
+  .addTensor("dot", {x: 1, y: 1}, ["i"], ["k","m"], [], [], { shape:"dot", showLabel: false })
   .addTensor("A", {x: 2, y: 0}, ["k"], ["l"])
   .addTensor("B", {x: 2, y: 2}, ["m"], ["n"])
-  .addTensor("Y", {x: 3, y: 1}, ["l","n"], ["j"], [], [], "dot")
+  .addTensor("dot", {x: 3, y: 1}, ["l","n"], ["j"], [], [], { shape:"dot", showLabel: false })
   .addContraction(0, 1, "k", "left")
   .addContraction(0, 2, "m", "left")
   .addContraction(1, 3, "l", "left")
   .addContraction(2, 3, "n", "left")
   .setSize(270, 220)
-  .setColorScheme(['X', 'Y'], ['black', 'black'], 'tensornetwork')
   .draw("#einsumindl13");
 
 ```

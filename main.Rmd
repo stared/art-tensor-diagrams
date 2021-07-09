@@ -375,7 +375,7 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], ["m"], ["t"])
+  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], ["m"], ["t"], { labelPos: "left" })
   .addTensor("W", "right", ["k"], ["q"])
   .addContraction(0, 1, "k")
   .setSize(220, 140)

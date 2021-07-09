@@ -218,7 +218,6 @@ $M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kro
 $T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
 
 <div id="example7" class="equation"></div>
-<!-- using temporal name '1' for 'dots'-->
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
@@ -370,7 +369,7 @@ TensorDiagram.new()
   <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
 </div>
 
-<!-- This diagram has the problem that the label of the first tensor is behind the index "up" -->
+<!-- This diagram has the problem that the label of the first tensor is behind the index "up" or "left" -->
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
@@ -533,8 +532,6 @@ TensorDiagram.new()
   <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
   <div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
 </div>
-
-<!-- curved contraction doesn't work -->
 
 ```{js, results='asis', echo=FALSE, message=FALSE}
 

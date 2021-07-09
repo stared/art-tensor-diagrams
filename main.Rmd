@@ -600,6 +600,25 @@ TensorDiagram.new()
 
 ```
 
+### Batch matrix multiplication
+
+<div id="einsumindl15" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ijk}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ikl}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"], [], ["j"])
+  .addTensor("B", "right", ["k"], ["l"], [], ["i"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 140)
+  .draw("#einsumindl15");
+
+```
 
 
 ## TODO

@@ -618,10 +618,11 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"], [], ["j"])
-  .addTensor("B", "right", ["k"], ["l"], [], ["i"])
+  .addTensor("B", {x: 1, y: 0}, ["l"], ["k"], [], ["i"])
+  .addTensor("A", "right", ["k"], ["j"], [], ["i"])
   .addContraction(0, 1, "k")
-  .setSize(220, 140)
+  .addContraction(0, 1, "i", "down")
+  .setSize(220, 150)
   .draw("#einsumindl15");
 
 ```

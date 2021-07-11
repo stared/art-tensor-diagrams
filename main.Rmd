@@ -422,7 +422,11 @@ TensorDiagram.new()
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
+  .addTensor("dot", {x: 0, y: 0}, [], ["i"], [], [], { shape: "dot", showLabel: false })
   .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
+  .addTensor("dot", {x: 2, y: 0}, ["j"], [], [], [], { shape: "dot", showLabel: false })
+  .addContraction(0, 1, "i")
+  .addContraction(1, 2, "j")
   .setSize(160, 110)
   .draw("#einsumindl6");
 

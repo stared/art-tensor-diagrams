@@ -627,6 +627,27 @@ TensorDiagram.new()
 
 ```
 
+### Tensor contraction
+
+<div id="einsumindl16" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{qr}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{pqrs}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{tuqvr}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["p"], ["q","r"], ["s"], [], { shape:"rectangle" } )
+  .addTensor("B", "right", ["u"], ["q","r"], ["v"], ["t"], { shape:"rectangle" } )
+  .addContraction(0, 1, "q")
+  .addContraction(0, 1, "r")
+  .setSize(220, 260)
+  .draw("#einsumindl16");
+
+```
+
 
 ## TODO
 

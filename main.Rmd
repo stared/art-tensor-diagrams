@@ -648,6 +648,29 @@ TensorDiagram.new()
 
 ```
 
+### Bilinear transformation
+
+<div id="einsumindl17" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{kl}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{jkl}$$</div>
+  <div class="eq-elem tensor-eq-C">$$C_{il}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("B", "right", ["k"], ["l"], [], ["j"])
+  .addTensor("C", "right", ["l"], ["i"])
+  .addContraction(0, 1, "k")
+  .addContraction(1, 2, "l")
+  .setSize(270, 130)
+  .draw("#einsumindl17");
+
+```
+
 
 ## TODO
 

@@ -1,0 +1,193 @@
+---
+title: "Tensor diagrams: basic operations"
+description: |
+  Penrose notation for deep learning.
+author:
+  - name: Piotr Migdał
+    url: https://p.migdal.pl
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumgame.io
+  - name: Claudia Zendejas-Morales
+    url: http://claudiazm.xyz
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumflytrap.com
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
+### Dot product: Vector
+
+<div id="einsumindl11" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", "start", [], ["i"])
+  .addTensor("b", "right", ["i"], [])
+  .addContraction(0, 1, "i")
+  .setSize(100, 120)
+  .draw("#einsumindl11");
+
+```
+
+### Dot product: Matrix
+
+<div id="einsumindl12" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("B", "right", ["j"], ["i"])
+  .addContraction(0, 1, "i", "down")
+  .addContraction(0, 1, "j")
+  .setSize(220, 120)
+  .draw("#einsumindl12");
+
+```
+
+### Dot product of two vectors
+
+<div id="einsumindl2" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", "start", [], ["i"])
+  .addTensor("b", "right", ["i"], [])
+  .addContraction(0, 1, "i")
+  .setSize(100, 120)
+  .draw("#einsumindl2");
+
+```
+
+### Matrix-vector multiplication
+
+<div id="einsumindl9" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{k}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("b", "right", ["k"], [])
+  .addContraction(0, 1, "k")
+  .setSize(160, 120)
+  .draw("#einsumindl9");
+
+```
+
+### Matrix-matrix multiplication
+
+<div id="einsumindl10" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("B", "right", ["k"], ["j"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 120)
+  .draw("#einsumindl10");
+
+```
+
+### Outer product
+
+<div id="einsumindl14_1" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
+</div>
+
+<div id="einsumindl14_2" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-C">$$C_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", {x: 1, y: 0}, ["i"], [])
+  .addTensor("b", {x: 2, y: 0}, [], ["j"])
+  .setSize(220, 120)
+  .draw("#einsumindl14_1");
+  
+TensorDiagram.new()
+  .addTensor("C", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(210, 120)
+  .draw("#einsumindl14_2");
+
+```
+
+### Matrix transpose
+
+
+<div id="einsumindl5_1" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
+</div>
+
+<div id="einsumindl5_2" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("B", {x: 1, y: 0}, ["j"], ["i"])
+  .setSize(160, 110)
+  .draw("#einsumindl5_1");
+  
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .setSize(160, 110)
+  .draw("#einsumindl5_2");
+
+```
+

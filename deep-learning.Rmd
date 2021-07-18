@@ -1,0 +1,35 @@
+---
+title: "Tensor diagrams: deep learning"
+description: |
+  Penrose notation for deep learning.
+author:
+  - name: Piotr Migdał
+    url: https://p.migdal.pl
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumgame.io
+  - name: Claudia Zendejas-Morales
+    url: http://claudiazm.xyz
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumflytrap.com
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
+## Examples
+

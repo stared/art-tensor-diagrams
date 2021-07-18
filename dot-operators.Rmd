@@ -1,0 +1,117 @@
+---
+title: "Tensor diagrams: dot operators"
+description: |
+  Penrose notation for deep learning.
+author:
+  - name: Piotr Migdał
+    url: https://p.migdal.pl
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumgame.io
+  - name: Claudia Zendejas-Morales
+    url: http://claudiazm.xyz
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumflytrap.com
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
+### Sum
+
+<div id="einsumindl6" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 0, y: 0}, [], ["i"], [], [], { shape: "dot", showLabel: false })
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
+  .addTensor("dot", {x: 2, y: 0}, ["j"], [], [], [], { shape: "dot", showLabel: false })
+  .addContraction(0, 1, "i")
+  .addContraction(1, 2, "j")
+  .setSize(160, 110)
+  .draw("#einsumindl6");
+
+```
+
+### Column sum
+
+<div id="einsumindl7" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 0, y: 0}, [], ["i"], [], [], { shape: "dot", showLabel: false })
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
+  .addContraction(0, 1, "i")
+  .setSize(160, 110)
+  .draw("#einsumindl7");
+
+```
+
+### Row sum
+
+<div id="einsumindl8" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"], [], [])
+  .addTensor("dot", {x: 2, y: 0}, ["j"], [], [], [], { shape: "dot", showLabel: false })
+  .addContraction(0, 1, "j")
+  .setSize(160, 110)
+  .draw("#einsumindl8");
+
+```
+
+### Hadamard product
+
+<div id="einsumindl13" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 1, y: 1}, ["i"], ["k","m"], [], [], { shape:"dot", showLabel: false })
+  .addTensor("A", {x: 2, y: 0}, ["k"], ["l"])
+  .addTensor("B", {x: 2, y: 2}, ["m"], ["n"])
+  .addTensor("dot", {x: 3, y: 1}, ["l","n"], ["j"], [], [], { shape:"dot", showLabel: false })
+  .addContraction(0, 1, "k", "left")
+  .addContraction(0, 2, "m", "left")
+  .addContraction(1, 3, "l", "left")
+  .addContraction(2, 3, "n", "left")
+  .setSize(270, 220)
+  .draw("#einsumindl13");
+
+```
+

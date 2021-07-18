@@ -1,0 +1,160 @@
+---
+title: "Tensor diagrams: other examples"
+description: |
+  Penrose notation for deep learning.
+author:
+  - name: Piotr Migdał
+    url: https://p.migdal.pl
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumgame.io
+  - name: Claudia Zendejas-Morales
+    url: http://claudiazm.xyz
+    affiliation: Quantum Flytrap
+    affiliation_url: https://quantumflytrap.com
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
+### Multiply two matrices followed by calculating the sum of each column resulting in a vector
+
+<div id="einsumindl1" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ik}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("B", "right", ["k"], ["j"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 120)
+  .draw("#einsumindl1");
+
+```
+
+### Applying a transformation to vectors in a higher-order tensor
+
+<div id="einsumindl3" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-T">$$T_{ntk}$$</div>
+  <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], [], ["t"])
+  .addTensor("W", "right", ["k"], ["q"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 130)
+  .draw("#einsumindl3");
+
+```
+
+### Order-4 tensor and project vectors in the 3rd dimension
+
+<div id="einsumindl4" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{tk}$$</div>
+  <div class="eq-elem tensor-eq-T">$$T_{ntkm}$$</div>
+  <div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
+</div>
+
+<!-- This diagram has the problem that the label of the first tensor is behind the index "up" or "left" -->
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], ["m"], ["t"], { labelPos: "left" })
+  .addTensor("W", "right", ["k"], ["q"])
+  .addContraction(0, 1, "k")
+  .setSize(220, 140)
+  .draw("#einsumindl4");
+
+```
+
+### Batch matrix multiplication
+
+<div id="einsumindl15" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ijk}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ikl}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("B", {x: 1, y: 0}, ["l"], ["k"], [], ["i"])
+  .addTensor("A", "right", ["k"], ["j"], [], ["i"])
+  .addContraction(0, 1, "k")
+  .addContraction(0, 1, "i", "down")
+  .setSize(220, 150)
+  .draw("#einsumindl15");
+
+```
+
+### Tensor contraction
+
+<div id="einsumindl16" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{qr}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{pqrs}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{tuqvr}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["p"], ["q","r"], ["s"], [], { shape:"rectangle" } )
+  .addTensor("B", "right", ["u"], ["q","r"], ["v"], ["t"], { shape:"rectangle" } )
+  .addContraction(0, 1, "q")
+  .addContraction(0, 1, "r")
+  .setSize(220, 260)
+  .draw("#einsumindl16");
+
+```
+
+### Bilinear transformation
+
+<div id="einsumindl17" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{kl}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{jkl}$$</div>
+  <div class="eq-elem tensor-eq-C">$$C_{il}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
+  .addTensor("B", "right", ["k"], ["l"], [], ["j"])
+  .addTensor("C", "right", ["l"], ["i"])
+  .addContraction(0, 1, "k")
+  .addContraction(1, 2, "l")
+  .setSize(270, 130)
+  .draw("#einsumindl17");
+
+```
+

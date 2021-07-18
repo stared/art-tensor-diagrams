@@ -72,26 +72,6 @@ TensorDiagram.new()
 
 ```
 
-### Dot product of two vectors
-
-<div id="einsumindl2" class="equation">
-  <div class="eq-diagram"></div>
-  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("a", "start", [], ["i"])
-  .addTensor("b", "right", ["i"], [])
-  .addContraction(0, 1, "i")
-  .setSize(100, 120)
-  .draw("#einsumindl2");
-
-```
-
 ### Matrix-vector multiplication
 
 <div id="einsumindl9" class="equation">

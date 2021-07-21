@@ -1,37 +1,4 @@
----
-title: "Tensor diagrams: dot operators"
-description: |
-  Penrose notation for deep learning.
-author:
-  - name: Piotr Migdał
-    url: https://p.migdal.pl
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumgame.io
-  - name: Claudia Zendejas-Morales
-    url: http://claudiazm.xyz
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumflytrap.com
-date: "`r Sys.Date()`"
-bibliography: references.bib
-output:
-  distill::distill_article:
-    toc: true
-    toc_float: true
-    self_contained: false
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r echo=FALSE, message=FALSE, results='asis'}
-cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
-  "<link rel='stylesheet' href='tensorDiagram.css'>"
-)
-```
-
-### Sum
+#### Sum
 
 <div id="einsumindl6" class="equation">
   <div class="eq-diagram"></div>
@@ -52,7 +19,7 @@ TensorDiagram.new()
 
 ```
 
-### Column sum
+#### Column sum
 
 <div id="einsumindl7" class="equation">
   <div class="eq-diagram"></div>
@@ -71,7 +38,7 @@ TensorDiagram.new()
 
 ```
 
-### Row sum
+#### Row sum
 
 <div id="einsumindl8" class="equation">
   <div class="eq-diagram"></div>
@@ -90,7 +57,7 @@ TensorDiagram.new()
 
 ```
 
-### Hadamard product
+#### Hadamard product
 
 <div id="einsumindl13" class="equation">
   <div class="eq-diagram"></div>

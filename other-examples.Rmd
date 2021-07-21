@@ -1,37 +1,4 @@
----
-title: "Tensor diagrams: other examples"
-description: |
-  Penrose notation for deep learning.
-author:
-  - name: Piotr Migdał
-    url: https://p.migdal.pl
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumgame.io
-  - name: Claudia Zendejas-Morales
-    url: http://claudiazm.xyz
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumflytrap.com
-date: "`r Sys.Date()`"
-bibliography: references.bib
-output:
-  distill::distill_article:
-    toc: true
-    toc_float: true
-    self_contained: false
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r echo=FALSE, message=FALSE, results='asis'}
-cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
-  "<link rel='stylesheet' href='tensorDiagram.css'>"
-)
-```
-
-### Multiply two matrices followed by calculating the sum of each column resulting in a vector
+##### Multiply two matrices followed by calculating the sum of each column resulting in a vector
 
 <div id="einsumindl1" class="equation">
   <div class="eq-diagram"></div>
@@ -51,7 +18,7 @@ TensorDiagram.new()
 
 ```
 
-### Applying a transformation to vectors in a higher-order tensor
+#### Applying a transformation to vectors in a higher-order tensor
 
 <div id="einsumindl3" class="equation">
   <div class="eq-diagram"></div>
@@ -71,7 +38,7 @@ TensorDiagram.new()
 
 ```
 
-### Order-4 tensor and project vectors in the 3rd dimension
+#### Order-4 tensor and project vectors in the 3rd dimension
 
 <div id="einsumindl4" class="equation">
   <div class="eq-diagram"></div>
@@ -93,7 +60,7 @@ TensorDiagram.new()
 
 ```
 
-### Batch matrix multiplication
+#### Batch matrix multiplication
 
 <div id="einsumindl15" class="equation">
   <div class="eq-diagram"></div>
@@ -114,7 +81,7 @@ TensorDiagram.new()
 
 ```
 
-### Tensor contraction
+#### Tensor contraction
 
 <div id="einsumindl16" class="equation">
   <div class="eq-diagram"></div>
@@ -135,7 +102,7 @@ TensorDiagram.new()
 
 ```
 
-### Bilinear transformation
+#### Bilinear transformation
 
 <div id="einsumindl17" class="equation">
   <div class="eq-diagram"></div>

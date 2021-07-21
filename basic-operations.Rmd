@@ -1,37 +1,4 @@
----
-title: "Tensor diagrams: basic operations"
-description: |
-  Penrose notation for deep learning.
-author:
-  - name: Piotr Migdał
-    url: https://p.migdal.pl
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumgame.io
-  - name: Claudia Zendejas-Morales
-    url: http://claudiazm.xyz
-    affiliation: Quantum Flytrap
-    affiliation_url: https://quantumflytrap.com
-date: "`r Sys.Date()`"
-bibliography: references.bib
-output:
-  distill::distill_article:
-    toc: true
-    toc_float: true
-    self_contained: false
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r echo=FALSE, message=FALSE, results='asis'}
-cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
-  "<link rel='stylesheet' href='tensorDiagram.css'>"
-)
-```
-
-### Dot product: Vector
+#### Dot product: Vector
 
 <div id="einsumindl11" class="equation">
   <div class="eq-diagram"></div>
@@ -51,7 +18,7 @@ TensorDiagram.new()
 
 ```
 
-### Dot product: Matrix
+#### Dot product: Matrix
 
 <div id="einsumindl12" class="equation">
   <div class="eq-diagram"></div>
@@ -72,7 +39,7 @@ TensorDiagram.new()
 
 ```
 
-### Matrix-vector multiplication
+#### Matrix-vector multiplication
 
 <div id="einsumindl9" class="equation">
   <div class="eq-diagram"></div>
@@ -92,7 +59,7 @@ TensorDiagram.new()
 
 ```
 
-### Matrix-matrix multiplication
+#### Matrix-matrix multiplication
 
 <div id="einsumindl10" class="equation">
   <div class="eq-diagram"></div>
@@ -112,7 +79,7 @@ TensorDiagram.new()
 
 ```
 
-### Outer product
+#### Outer product
 
 <div id="einsumindl14_1" class="equation">
   <div class="eq-diagram"></div>
@@ -142,7 +109,7 @@ TensorDiagram.new()
 
 ```
 
-### Matrix transpose
+#### Matrix transpose
 
 
 <div id="einsumindl5_1" class="equation">

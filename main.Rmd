@@ -129,6 +129,34 @@ TensorDiagram.new()
 
 Each loose end correspond to an index.
 
+### Basic operations
+
+```{r child = 'basic-operations.Rmd'}
+```
+
+### Dot operator
+
+```{r child = 'dot-operators.Rmd'}
+```
+
+### Other examples
+
+```{r child = 'other-examples.Rmd'}
+```
+
+## Applications
+
+### Machine learning
+
+```{r child = 'machine-learning.Rmd'}
+```
+
+### Deep learning
+
+```{r child = 'deep-learning.Rmd'}
+```
+
+## Old
 
 ### Operations
 

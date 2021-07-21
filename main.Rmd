@@ -24,6 +24,13 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{r echo=FALSE, message=FALSE, results='asis'}
+cat(
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.4/dist/esbuild/tensor-diagrams.js'></script>",
+  "<link rel='stylesheet' href='tensorDiagram.css'>"
+)
+```
+
 Multidimenstional arrays are the basic building blocks for any deep neural network, and many other models in statistics and machine learning.
 However, even for relatively simple operations the notation becomes monstrous:
 
@@ -48,42 +55,34 @@ That is - we focus on array of real numbers and relevant operations.
 We present it as a convenient notation for matrix summation, nothing less more more.
 In this notation, the described equation becomes
 
-```{r fig.height=2}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "p" },
-    { "x": 1, "y": 0, "name": "T" },
-    { "x": 2, "y": 0, "name": "", "kind": "dot" },
-    { "x": 3, "y": 0, "name": "T" },
-    { "x": 4, "y": 0, "name": "", "kind": "dot" },
-    { "x": 5, "y": 0, "name": "T" },
-    { "x": 6, "y": 0, "name": "", "kind": "dot" },
-    { "x": 2, "y": 1, "name": "O", "labPos": "left" },
-    { "x": 4, "y": 1, "name": "O", "labPos": "left" },
-    { "x": 6, "y": 1, "name": "O", "labPos": "left" }
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i1" },
-    { "source": 1, "target": 2, "name": "i2" },
-    { "source": 2, "target": 3, "name": "i2" },
-    { "source": 3, "target": 4, "name": "i3" },
-    { "source": 4, "target": 5, "name": "i3" },
-    { "source": 5, "target": 6, "name": "i4" },
-    { "source": 2, "target": 7, "name": "i2" },
-    { "source": 4, "target": 8, "name": "i2" },
-    { "source": 6, "target": 9, "name": "i2" },
-    { "source": 7, "target": "down", "name": "j1" },
-    { "source": 8, "target": "down", "name": "j2" },
-    { "source": 9, "target": "down", "name": "j3" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
-```
+<div id="example1" class="equation"></div>
 
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("p", {x: 0, y: 0}, [], ["i1"])
+  .addTensor("T", {x: 1, y: 0}, ["i1"], ["tx"])
+  .addTensor("dot", {x: 2, y: 0}, ["tx"], ["xt"], [], ["xo"], { shape:"dot", showLabel: false })
+  .addTensor("T", {x: 3, y: 0}, ["xt"], ["ty"])
+  .addTensor("dot", {x: 4, y: 0}, ["ty"], ["yt"], [], ["yo"], { shape:"dot", showLabel: false })
+  .addTensor("T", {x: 5, y: 0}, ["yt"], ["tz"])
+  .addTensor("dot", {x: 6, y: 0}, ["tz"], [], [], ["zo"], { shape:"dot", showLabel: false })
+  .addTensor("O", {x: 2, y: 1}, [], [], ["xo"], ["j1"], { labelPos: "left"} )
+  .addTensor("O", {x: 4, y: 1}, [], [], ["yo"], ["j2"], { labelPos: "left"} )
+  .addTensor("O", {x: 6, y: 1}, [], [], ["zo"], ["j3"], { labelPos: "left"} )
+  .addContraction(0, 1, "i1")
+  .addContraction(1, 2, "tx")
+  .addContraction(2, 3, "xt")
+  .addContraction(2, 7, "xo")
+  .addContraction(3, 4, "ty")
+  .addContraction(4, 5, "yt")
+  .addContraction(4, 8, "yo")
+  .addContraction(5, 6, "tz")
+  .addContraction(6, 9, "zo")
+  .setSize(400, 200)
+  .draw("#example1");
+
+```
 
 In this article we use **tensor** as in `torch.Tensor` or TensorFlow - i.e. multidimensional arrays of numebrs with  some additional structure. This a very specific case of would a mathematican call a tensor.
 In this context **tensor product** is **outer product**.
@@ -113,193 +112,49 @@ Tensor diagrams are popular quantum state decomposition for condensed matter phy
 
 A scalar $c$, a vector $v_i$, a matrix $M_{ij}$ and a (third-order) tensor $T_{ijk}$ are represented by:
 
-```{r fig.height=1.2}
-library(r2d3)
-data <- jsonlite::read_json("diagrams/tensors.json")
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+<div id="example2" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("a", {x: 0, y: 0}, [], [])
+  .addTensor("v", {x: 2, y: 0}, [], ["i"])
+  .addTensor("M", {x: 5, y: 0}, ["i"], ["j"])
+  .addTensor("T", {x: 8, y: 0}, ["i"], ["k"], [], ["j"])
+  .setSize(580, 140)
+  .draw("#example2");
+
+
 ```
 
 Each loose end correspond to an index.
 
+### Basic operations
 
-### Operations
-
-#### scalar product
-
-$\sum_i v_i u_i$ (or traditionally:  $\vec{v} \cdot \vec{u}$, or in quantum mechanics $\langle u | v \rangle$)
-
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "v" },
-    { "x": 1, "y": 0, "name": "u" }
-
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{r child = 'basic-operations.Rmd'}
 ```
 
+### Dot operator
 
-#### Vector times matrix
-
-$\sum_i v_i M_{ij}$ (or traditionally:  $\vec{u} M$)
-
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "u" },
-    { "x": 1, "y": 0, "name": "M" }
-
-  ],
-  "contractions": [
-  { "source": 0, "target": 1, "name": "i" },
-  { "source": 1, "target": "right", "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{r child = 'dot-operators.Rmd'}
 ```
 
-#### Matrix times matrix
+### Other examples
 
-$\sum_j M_{ij} M_{jk}$ (or traditionally:  $M N$)
-
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 1, "y": 0, "name": "M" },
-    { "x": 2, "y": 0, "name": "N" }
-
-  ],
-  "contractions": [
-  { "source": 0, "target": "left", "name": "i" },
-  { "source": 0, "target": 1, "name": "j" },
-  { "source": 1, "target": "right", "name": "k" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{r child = 'other-examples.Rmd'}
 ```
 
-#### Expected value
+## Applications
 
-$\sum_{ij} v_i M_{ij} v_j$ (or in the context of quantum: $\langle v | M | v \rangle$)
+### Machine learning
 
-```{r fig.height=0.8}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "v" },
-    { "x": 1, "y": 0, "name": "M" },
-    { "x": 2, "y": 0, "name": "v" }
-
-  ],
-  "contractions": [
-    { "source": 0, "target": 1, "name": "i" },
-    { "source": 1, "target": 2, "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
+```{r child = 'machine-learning.Rmd'}
 ```
-
-
-- trace
-- tensor product
-- batch matrix product
-
-### Black dot
-
-Let's introduce a symbol for a tensor with all 1s.
-
-In the case of no dimensions, it is just 1, and it is not that interesting.
-For $v = (1, 1, \ldots, 1)$.
-$M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
-$T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
-
-```{r fig.height=1.6}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 0, "y": 0, "name": "", "kind": "dot" },
-    { "x": 2, "y": 0, "name": "", "kind": "dot" },
-    { "x": 5, "y": 0, "name": "", "kind": "dot" },
-    { "x": 8, "y": 0, "name": "", "kind": "dot" }
-  ],
-  "contractions": [
-    { "source": 1, "target": "right", "name": "i" },
-    { "source": 2, "target": "left", "name": "i" },
-    { "source": 2, "target": "right", "name": "j" },
-    { "source": 3, "target": "left", "name": "i" },
-    { "source": 3, "target": "down", "name": "j" },
-    { "source": 3, "target": "right", "name": "k" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
-```
-
-#### Matrix is diagonal
-
-
-```{r fig.height=1.2}
-library(r2d3)
-s <- '
-{
-  "tensors": [
-    { "x": 1, "y": 0, "name": "", "kind": "dot" },
-    { "x": 1, "y": 1, "name": "s", "labPos": "left" }
-  ],
-  "contractions": [
-    { "source": 0, "target": "left", "name": "i" },
-    { "source": 0, "target": 1, "name": "k" },
-    { "source": 0, "target": "right", "name": "j" }
-  ]
-}
-'
-data <- jsonlite::parse_json(s)
-r2d3(data, script = "tensorDiagram.js", css = "tensorDiagram.css")
-```
-
-
-- normalized probabilities (and other momemnts)
-- matrix is stochastic
-- matrix is double stochastic
-- events are independent
-
-### Models and properties
-
-- SVD
-- Markov Chain
-- Hidden Markov Chain
-- Restricted Boltzman machine
-- Ising model
 
 ### Deep learning
 
-- batch processing
-- convolution
-- separable convolution
-- batch/etc normalization
-
-
+```{r child = 'deep-learning.Rmd'}
+```
 
 
 ## You may have seen tensor diagrams
@@ -308,12 +163,9 @@ Feynman Diagrams[@kaiser_physics_2005] (for unbounded operators on infitely-dime
 
 TODO: Do LSTM diagrams qualify?
 
-## Hidden Markov Models
+## Conclusion
 
-Hidden Markov Models[@rabiner_tutorial_1989].
-
-## More 
-
+Tensor diagrams are cool!
 
 ## Footnote
 
@@ -329,322 +181,9 @@ Other inspirations:
 - [Tensor diagram notation in D3.js - JSFiddle](https://jsfiddle.net/stared/8huz5gy7/) - initial version of vis
 - [HN on Terry Tao on some desirable properties of mathematical notation](https://news.ycombinator.com/item?id=23911903) - including that "Is it just me, or does probability theory in general have fairly terrible notation?"
 
-# Claudia's part
-
-```{r echo=FALSE, message=FALSE, results='asis'}
-cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.1/dist/esbuild/tensor-diagrams.js'></script>",
-  "<link rel='stylesheet' href='tensorDiagram.css'>"
-)
-```
-
-### Multiply two matrices followed by calculating the sum of each column resulting in a vector
-
-<div id="einsumindl1" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ik}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
-  .addTensor("B", "right", ["k"], ["j"])
-  .addContraction(0, 1, "k")
-  .setSize(220, 120)
-  .draw("#einsumindl1");
-
-```
-
-### Dot product of two vectors
-
-<div id="einsumindl2" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("a", "start", [], ["i"])
-  .addTensor("b", "right", ["i"], [])
-  .addContraction(0, 1, "i")
-  .setSize(100, 120)
-  .draw("#einsumindl2");
-
-```
-
-### Applying a transformation to vectors in a higher-order tensor
-
-<div id="einsumindl3" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-T">$$T_{ntk}$$</div>
-<div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], [], ["t"])
-  .addTensor("W", "right", ["k"], ["q"])
-  .addContraction(0, 1, "k")
-  .setSize(220, 130)
-  .draw("#einsumindl3");
-
-```
-
-### Order-4 tensor and project vectors in the 3rd dimension
-
-<div id="einsumindl4" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{tk}$$</div>
-<div class="eq-elem tensor-eq-T">$$T_{ntkm}$$</div>
-<div class="eq-elem tensor-eq-W">$$W_{kq}$$</div>
-</div>
-
-<!-- This diagram has the problem that the label of the first tensor is behind the index "up" -->
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("T", {x: 1, y: 0}, ["n"], ["k"], ["m"], ["t"])
-  .addTensor("W", "right", ["k"], ["q"])
-  .addContraction(0, 1, "k")
-  .setSize(220, 140)
-  .draw("#einsumindl4");
-
-```
-
-### Matrix transpose
-
-
-<div id="einsumindl5_1" class="equation">
-<div class="eq-diagram"></div>
- <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
- <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
-</div>
-
-<div id="einsumindl5_2" class="equation">
-<div class="eq-diagram"></div>
- <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
- <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("B", {x: 1, y: 0}, ["j"], ["i"])
-  .setSize(160, 110)
-  .draw("#einsumindl5_1");
-  
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
-  .setSize(160, 110)
-  .draw("#einsumindl5_2");
-
-```
-
-### Sum
-
-<div id="einsumindl6" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
-  .setSize(160, 110)
-  .draw("#einsumindl6");
-
-```
-
-### Column sum
-
-<div id="einsumindl7" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
-  .setSize(160, 110)
-  .draw("#einsumindl7");
-
-```
-
-### Row sum
-
-<div id="einsumindl8" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
-  .setSize(160, 110)
-  .draw("#einsumindl8");
-
-```
-
-### Matrix-vector multiplication
-
-<div id="einsumindl9" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{k}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
-  .addTensor("b", "right", ["k"], [])
-  .addContraction(0, 1, "k")
-  .setSize(160, 120)
-  .draw("#einsumindl9");
-
-```
-
-### Matrix-matrix multiplication
-
-<div id="einsumindl10" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["k"])
-  .addTensor("B", "right", ["k"], ["j"])
-  .addContraction(0, 1, "k")
-  .setSize(220, 120)
-  .draw("#einsumindl10");
-
-```
-
-### Dot product: Vector
-
-<div id="einsumindl11" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("a", "start", [], ["i"])
-  .addTensor("b", "right", ["i"], [])
-  .addContraction(0, 1, "i")
-  .setSize(100, 120)
-  .draw("#einsumindl11");
-
-```
-
-### Dot product: Matrix
-
-<div id="einsumindl12" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{ij}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
-</div>
-
-<!-- curved contraction doesn't work -->
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
-  .addTensor("B", "right", ["j"], ["i"])
-  .addContraction(0, 1, "i", "down")
-  .addContraction(0, 1, "j")
-  .setSize(220, 120)
-  .draw("#einsumindl12");
-
-```
-
-### Hadamard product
-
-<div id="einsumindl13" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
-<div class="eq-elem tensor-eq-B">$$B_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("X", {x: 1, y: 1}, ["i"], ["k","m"])
-  .addTensor("A", {x: 2, y: 0}, ["k"], ["l"])
-  .addTensor("B", {x: 2, y: 2}, ["m"], ["n"])
-  .addTensor("Y", {x: 3, y: 1}, ["l","n"], ["j"])
-  .addContraction(0, 1, "k", "left")
-  .addContraction(0, 2, "m", "left")
-  .addContraction(1, 3, "l", "left")
-  .addContraction(2, 3, "n", "left")
-  .setSize(270, 220)
-  .draw("#einsumindl13");
-
-```
-
-### Outer product
-
-<div id="einsumindl14_1" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
-<div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
-</div>
-
-<div id="einsumindl14_2" class="equation">
-<div class="eq-diagram"></div>
-<div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
-<div class="eq-elem tensor-eq-C">$$C_{ij}$$</div>
-</div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("a", {x: 1, y: 0}, ["i"], [])
-  .addTensor("b", {x: 2, y: 0}, [], ["j"])
-  .setSize(220, 120)
-  .draw("#einsumindl14_1");
-  
-TensorDiagram.new()
-  .addTensor("C", {x: 1, y: 0}, ["i"], ["j"])
-  .setSize(210, 120)
-  .draw("#einsumindl14_2");
-
-```
-
-
-
 ## TODO
 
 Idea:
 
-- Linear algebra.
-- Copy operation.
-- Stochastic models.
-- Tensors in the sense of TensorFlow and torch.tensor.
+- Antisymmetric tensor and cross product.
+- Tensors in the sense of TensorFlow and torch.tensor (e.g with einsum).

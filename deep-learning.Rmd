@@ -1,0 +1,21 @@
+#### Tensors for data
+
+TODO
+
+#### Batch processing
+
+TODO
+
+#### Convoutions
+
+TODO
+
+#### Separable convolution
+
+TODO
+
+#### Non-linearity
+
+TODO
+
+And maybe Batch normalization

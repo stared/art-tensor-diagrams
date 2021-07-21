@@ -1,0 +1,149 @@
+#### Scalar product
+
+A dot product of two vectors - traditionally:  $\vec{v} \cdot \vec{u}$ or in quantum mechanics $\langle u | v \rangle$.
+
+<div id="einsumindl11" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{i}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{i}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("u", "start", [], ["i"])
+  .addTensor("v", "right", ["i"], [])
+  .addContraction(0, 1, "i")
+  .setSize(100, 120)
+  .draw("#einsumindl11");
+
+```
+
+#### Matrix-vector multiplication
+
+A vector transformed by a matrix, traditionally $A \vec{u}$ or in quanutm mechanics $A | v \rangle$.
+
+<div id="einsumindl9" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{j}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ij}$$</div>
+  <div class="eq-elem tensor-eq-b">$$v_{j}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("v", "right", ["j"], [])
+  .addContraction(0, 1, "j")
+  .setSize(160, 120)
+  .draw("#einsumindl9");
+
+```
+
+#### Matrix-matrix multiplication
+
+Multiply matrix by matrix, traditionally:  $A B$.
+
+<div id="einsumindl10" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}\sum_{k}$$</div>
+  <div class="eq-elem tensor-eq-A">$$A_{ik}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{kj}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("A", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("B", "right", ["j"], ["k"])
+  .addContraction(0, 1, "j")
+  .setSize(220, 120)
+  .draw("#einsumindl10");
+
+```
+
+#### Outer product
+
+An outer product between two vectors. In it commonly used in quantum mechanics and written as $| u \rangle \langle v |$. In particular for $| u \rangle = | v \rangle$, we get a projection operator $| v \rangle \langle v |$.
+
+<div id="einsumindl14_1" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-a">$$a_{i}$$</div>
+  <div class="eq-elem tensor-eq-b">$$b_{j}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("u", {x: 1, y: 0}, ["i"], [])
+  .addTensor("v", {x: 2, y: 0}, [], ["j"])
+  .setSize(220, 120)
+  .draw("#einsumindl14_1");
+
+```
+
+#### Tensor product
+
+TODO
+
+#### Expected value
+
+$\sum_{ij} v_i M_{ij} v_j$ (or in the context of quantum: $\langle v | M | v \rangle$)
+
+<div id="example6" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("v", {x: 0, y: 0}, [], ["i"])
+  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
+  .addTensor("v", {x: 2, y: 0}, ["j"], [])
+  .addContraction(0, 1, "i")
+  .addContraction(1, 2, "j")
+  .setSize(160, 120)
+  .draw("#example6");
+
+```
+
+#### Trace 
+
+TODO
+
+#### Matrix transpose
+
+TO FIX
+
+<div id="einsumindl5_1" class="equation">
+  <div class="eq-diagram"></div>
+  <div class="eq-elem">$$\hspace{0.3cm}=\hspace{0.3cm}$$</div>
+  <div class="eq-elem tensor-eq-B">$$B_{ji}$$</div>
+</div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("B", {x: 1, y: 0}, ["j"], ["i"])
+  .setSize(160, 110)
+  .draw("#einsumindl5_1");
+
+```
+
+#### Matrix is diagonal
+
+<div id="example8" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 1, y: 0}, ["i"], ["j"], [], ["k"], { shape:"dot", showLabel: false })
+  .addTensor("S", {x: 1, y: 1}, [], [], ["k"], [], { labelPos: "left"} )
+  .addContraction(0, 1, "k")
+  .setSize(160, 150)
+  .draw("#example8");
+
+```
+
+

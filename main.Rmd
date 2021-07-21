@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r echo=FALSE, message=FALSE, results='asis'}
 cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.3/dist/esbuild/tensor-diagrams.js'></script>",
+  "<script src='https://unpkg.com/tensor-diagrams@0.2.4/dist/esbuild/tensor-diagrams.js'></script>",
   "<link rel='stylesheet' href='tensorDiagram.css'>"
 )
 ```
@@ -156,146 +156,6 @@ Each loose end correspond to an index.
 ```{r child = 'deep-learning.Rmd'}
 ```
 
-## Old
-
-### Operations
-
-#### scalar product
-
-$\sum_i v_i u_i$ (or traditionally:  $\vec{v} \cdot \vec{u}$, or in quantum mechanics $\langle u | v \rangle$)
-
-<div id="example3" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("v", {x: 0, y: 0}, [], ["i"])
-  .addTensor("u", {x: 1, y: 0}, ["i"], [])
-  .addContraction(0, 1, "i")
-  .setSize(100, 120)
-  .draw("#example3");
-
-```
-
-
-#### Vector times matrix
-
-$\sum_i v_i M_{ij}$ (or traditionally:  $\vec{u} M$)
-
-<div id="example4" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("u", {x: 0, y: 0}, [], ["i"])
-  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
-  .addContraction(0, 1, "i")
-  .setSize(160, 120)
-  .draw("#example4");
-
-```
-
-#### Matrix times matrix
-
-$\sum_j M_{ij} M_{jk}$ (or traditionally:  $M N$)
-
-<div id="example5" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
-  .addTensor("N", {x: 2, y: 0}, ["j"], ["k"])
-  .addContraction(0, 1, "j")
-  .setSize(220, 120)
-  .draw("#example5");
-
-```
-
-#### Expected value
-
-$\sum_{ij} v_i M_{ij} v_j$ (or in the context of quantum: $\langle v | M | v \rangle$)
-
-<div id="example6" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("v", {x: 0, y: 0}, [], ["i"])
-  .addTensor("M", {x: 1, y: 0}, ["i"], ["j"])
-  .addTensor("v", {x: 2, y: 0}, ["j"], [])
-  .addContraction(0, 1, "i")
-  .addContraction(1, 2, "j")
-  .setSize(160, 120)
-  .draw("#example6");
-
-```
-
-
-- trace
-- tensor product
-- batch matrix product
-
-### Black dot
-
-Let's introduce a symbol for a tensor with all 1s.
-
-In the case of no dimensions, it is just 1, and it is not that interesting.
-For $v = (1, 1, \ldots, 1)$.
-$M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
-$T$ is a tensor for which $T_{ijk} = 0$ for all $i = j = k$, otherwise there are 0s.
-
-<div id="example7" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("dot", {x: 0, y: 0}, [], [], [], [], { shape:"dot", showLabel: false })
-  .addTensor("dot", {x: 2, y: 0}, [], ["i"], [], [], { shape:"dot", showLabel: false })
-  .addTensor("dot", {x: 5, y: 0}, ["i"], ["j"], [], [], { shape:"dot", showLabel: false })
-  .addTensor("dot", {x: 8, y: 0}, ["i"], ["k"], [], ["j"], { shape:"dot", showLabel: false })
-  .setSize(580, 140)
-  .draw("#example7");
-
-```
-
-#### Matrix is diagonal
-
-<div id="example8" class="equation"></div>
-
-```{js, results='asis', echo=FALSE, message=FALSE}
-
-TensorDiagram.new()
-  .addTensor("dot", {x: 1, y: 0}, ["i"], ["j"], [], ["k"], { shape:"dot", showLabel: false })
-  .addTensor("S", {x: 1, y: 1}, [], [], ["k"], [], { labelPos: "left"} )
-  .addContraction(0, 1, "k")
-  .setSize(160, 150)
-  .draw("#example8");
-
-```
-
-- normalized probabilities (and other momemnts)
-- matrix is stochastic
-- matrix is double stochastic
-- events are independent
-
-### Models and properties
-
-- SVD
-- Markov Chain
-- Hidden Markov Chain
-- Restricted Boltzman machine
-- Ising model
-
-### Deep learning
-
-- batch processing
-- convolution
-- separable convolution
-- batch/etc normalization
-
-
-
 
 ## You may have seen tensor diagrams
 
@@ -303,12 +163,9 @@ Feynman Diagrams[@kaiser_physics_2005] (for unbounded operators on infitely-dime
 
 TODO: Do LSTM diagrams qualify?
 
-## Hidden Markov Models
+## Conclusion
 
-Hidden Markov Models[@rabiner_tutorial_1989].
-
-## More 
-
+Tensor diagrams are cool!
 
 ## Footnote
 
@@ -328,7 +185,5 @@ Other inspirations:
 
 Idea:
 
-- Linear algebra.
-- Copy operation.
-- Stochastic models.
-- Tensors in the sense of TensorFlow and torch.tensor.
+- Antisymmetric tensor and cross product.
+- Tensors in the sense of TensorFlow and torch.tensor (e.g with einsum).

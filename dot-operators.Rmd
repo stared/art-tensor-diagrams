@@ -1,3 +1,26 @@
+#### Dot operator
+
+Let's introduce a symbol for a tensor with all 1s.
+
+In the case of no dimensions, it is just 1, and it is not that interesting.
+For $v = (1, 1, \ldots, 1)$.
+$M$ is an identity matrix or [Kronecker delta](https://en.wikipedia.org/wiki/Kronecker_delta).
+$T$ is a tensor for which $T_{ijk} = 1$ if  $i = j = k$, otherwise there are 0s.
+
+<div id="example7" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+
+TensorDiagram.new()
+  .addTensor("dot", {x: 0, y: 0}, [], [], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 2, y: 0}, [], ["i"], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 5, y: 0}, ["i"], ["j"], [], [], { shape:"dot", showLabel: false })
+  .addTensor("dot", {x: 8, y: 0}, ["i"], ["k"], [], ["j"], { shape:"dot", showLabel: false })
+  .setSize(580, 140)
+  .draw("#example7");
+
+```
+
 #### Sum
 
 <div id="einsumindl6" class="equation">
@@ -82,3 +105,11 @@ TensorDiagram.new()
 
 ```
 
+#### Properties
+
+TODO:
+
+- normalized probabilities (and other momemnts)
+- matrix is stochastic
+- matrix is double stochastic
+- events are independent

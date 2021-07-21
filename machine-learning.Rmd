@@ -2,7 +2,13 @@
 
 TODO
 
-#### Markov chain
+#### Factorization and SVD
+
+TODO
+
+#### Hidden Markov Model
+
+Hidden Markov Models[@rabiner_tutorial_1989].
 
 TODO
 

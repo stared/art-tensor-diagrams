@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r echo=FALSE, message=FALSE, results='asis'}
 cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.4/dist/esbuild/tensor-diagrams.js'></script>",
+  "<script src='https://unpkg.com/tensor-diagrams@0.3.0/dist/esbuild/tensor-diagrams.js'></script>",
   "<link rel='stylesheet' href='tensorDiagram.css'>"
 )
 ```

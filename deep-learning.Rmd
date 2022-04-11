@@ -1,12 +1,73 @@
 #### Tensors for data
 
-TODO
+In deep learning data is structured on 3-5 dimensional tensor.
+The most typical dimensions are:
+* sample number (size: batch size),
+* features - also called embeddings,
+* spatial coordinates (1D, 2D or 3D).
+
+The order of the dimensions depends on the deep learning framework and concrete functions.
+For discussions on that, see [PyTorch tensor dimension names](https://github.com/stared/pytorch-named-dims).
+
+Let's focus on a two-dimensional image with RGB color channels for input.
+
+<div id="dl-data" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+TensorDiagram.new()
+  .addTensor("X", "start", [], ["n", "c", "x", "y"], [], [], { shape: "rectangle"})
+  .setSize(160, 300)
+  .draw("#dl-data");
+```
+
+#### Averages
+
+If we want to average over all samples, e.g. for exploration.
+
+* [Machine Learning for Visualization - Let’s Explore the Cutest Big Dataset](https://medium.com/@enjalot/machine-learning-for-visualization-927a9dff1cab) by Ian Johnson,
+* [Forma Fluens](http://formafluens.io/) by Visual AI Lab @ IBM Research
+* [QuickDraw Visual Averages by Country](https://twitter.com/kcimc/status/902229612666658816?lang=en) by Kyle McDonald
+
+we can sum the following way:
+
+<div id="dl-avg-image" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+TensorDiagram.new()
+  .addTensor("X", "start", [], ["n", "c", "x", "y"], [], [], { shape: "rectangle"})
+  .addSummation("n")
+  .setSize(160, 300)
+  .draw("#dl-avg-image");
+```
+
+Channel average values will
+
+<div id="dl-avg-per-channel" class="equation"></div>
+
+```{js, results='asis', echo=FALSE, message=FALSE}
+TensorDiagram.new()
+  .addTensor("X", "start", [], ["n", "c", "x", "y"], [], [], { shape: "rectangle"})
+  .addSummation("n")
+  .addSummation("x")
+  .addSummation("y")
+  .setSize(160, 300)
+  .draw("#dl-avg-per-channel");
+```
+
+Mention:
+
+* batch normalization
+* Google Draw dataset 
+
+Note:
+
+* do we want/need to introduce a symbol for average vs sum?
 
 #### Batch processing
 
 TODO
 
-#### Convoutions
+#### Convolutions
 
 TODO
 

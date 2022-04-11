@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r echo=FALSE, message=FALSE, results='asis'}
 cat(
-  "<script src='https://unpkg.com/tensor-diagrams@0.2.4/dist/esbuild/tensor-diagrams.js'></script>",
+  "<script src='https://unpkg.com/tensor-diagrams@0.3.0/dist/esbuild/tensor-diagrams.js'></script>",
   "<link rel='stylesheet' href='tensorDiagram.css'>"
 )
 ```
@@ -60,26 +60,18 @@ In this notation, the described equation becomes
 ```{js, results='asis', echo=FALSE, message=FALSE}
 
 TensorDiagram.new()
-  .addTensor("p", {x: 0, y: 0}, [], ["i1"])
-  .addTensor("T", {x: 1, y: 0}, ["i1"], ["tx"])
-  .addTensor("dot", {x: 2, y: 0}, ["tx"], ["xt"], [], ["xo"], { shape:"dot", showLabel: false })
-  .addTensor("T", {x: 3, y: 0}, ["xt"], ["ty"])
-  .addTensor("dot", {x: 4, y: 0}, ["ty"], ["yt"], [], ["yo"], { shape:"dot", showLabel: false })
-  .addTensor("T", {x: 5, y: 0}, ["yt"], ["tz"])
-  .addTensor("dot", {x: 6, y: 0}, ["tz"], [], [], ["zo"], { shape:"dot", showLabel: false })
-  .addTensor("O", {x: 2, y: 1}, [], [], ["xo"], ["j1"], { labelPos: "left"} )
-  .addTensor("O", {x: 4, y: 1}, [], [], ["yo"], ["j2"], { labelPos: "left"} )
-  .addTensor("O", {x: 6, y: 1}, [], [], ["zo"], ["j3"], { labelPos: "left"} )
-  .addContraction(0, 1, "i1")
-  .addContraction(1, 2, "tx")
-  .addContraction(2, 3, "xt")
-  .addContraction(2, 7, "xo")
-  .addContraction(3, 4, "ty")
-  .addContraction(4, 5, "yt")
-  .addContraction(4, 8, "yo")
-  .addContraction(5, 6, "tz")
-  .addContraction(6, 9, "zo")
-  .setSize(400, 200)
+  .addTensor("p", {x: 0, y: 0}, [], ["i0"])
+  .addTensor("T", {x: 1, y: 0}, ["i0"], ["i1"])
+  .addTensor("T", {x: 3, y: 0}, ["i1"], ["i2"])
+  .addTensor("T", {x: 5, y: 0}, ["i2"], ["i3"])
+  .addTensor("O", {x: 2, y: 1}, [], [], ["i1"], ["j1"], { labelPos: "left"} )
+  .addTensor("O", {x: 4, y: 1}, [], [], ["i2"], ["j2"], { labelPos: "left"} )
+  .addTensor("O", {x: 6, y: 1}, [], [], ["i3"], ["j3"], { labelPos: "left"} )
+  .addTensor("out", {x: 7, y: 0}, ["i3"], [], [], [], [], { showLabel: false, size: 0.1 })
+  .addSummation("i1", {x: 2, y: 0})
+  .addSummation("i2", {x: 4, y: 0})
+  .addSummation("i3", {x: 6, y: 0}, )
+  .setSize(500, 200)
   .draw("#example1");
 
 ```
@@ -121,7 +113,7 @@ TensorDiagram.new()
   .addTensor("v", {x: 2, y: 0}, [], ["i"])
   .addTensor("M", {x: 5, y: 0}, ["i"], ["j"])
   .addTensor("T", {x: 8, y: 0}, ["i"], ["k"], [], ["j"])
-  .setSize(580, 140)
+  .setSize(650, 140)
   .draw("#example2");
 
 
